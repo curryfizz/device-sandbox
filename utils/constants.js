@@ -1,17 +1,20 @@
-import Fan from "../components/devices/Fan";
-import Light from "../components/devices/Light";
+import Fan from "../components/devices/Fan/Fan";
+import Light from "../components/devices/Light/Light";
+import Lightbulb from "../components/devices/Light/Lightbulb";
 
 
 export const DEVICES = [
   { 
     id: 'light', 
     name: 'Light', 
-    component: Light  // Reference to component instead of icon
+    component: Light,
+    canvasComponent: Lightbulb,
+    canvasComponentProps: { size: 160 }
   },
   { 
     id: 'fan', 
     name: 'Fan', 
-    component: Fan    // Reference to component instead of icon
+    component: Fan    
   }
 ];
 

@@ -1,22 +1,31 @@
 import React from 'react';
 
-const CanvasItem = ({ item, onDragStart, onRemove }) => {
-  const DeviceComponent = item.component; // Get the component
+const CanvasItem = ({ item, onDragStart, onRemove, onUpdateItem }) => {
+  const CanvasComponent = item.canvasComponent || item.component;
+  
+  const canvasComponentSize = item.canvasComponentProps?.size || 160;
 
+  if (!CanvasComponent) {
+    return <div>Component not found</div>;
+  }
   return (
     <div
       draggable
       onDragStart={() => onDragStart(item)}
-      onDoubleClick={() => onRemove(item.id)}
       style={{
-        left: `${item.x - 40}px`,
-        top: `${item.y - 40}px`,
+        position: 'absolute',
+        left: `${item.x - 32}px`,
+        top: `${item.y - 48}px`,
       }}
-      className="absolute w-20 h-20 bg-gray-800 border-2 border-gray-700 rounded-xl flex flex-col items-center justify-center gap-1.5 cursor-move hover:scale-105 transition-transform duration-100"
-      title="Double-click to remove"
+      className="cursor-move hover:scale-105 transition-transform duration-100 group"
     >
-      <DeviceComponent size={24} className="text-gray-400" />
-      <span className="text-xs text-gray-200">{item.name}</span>
+      {/* Render the canvas component */}
+      <CanvasComponent
+        size={canvasComponentSize}
+        isOn={item.isOn || false}
+        onToggle={() => onUpdateItem?.(item.id, { isOn: !item.isOn })}
+      />
+
     </div>
   );
 };

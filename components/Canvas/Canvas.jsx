@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import CanvasItem from './CanvasItem';
-import DragIndicator from './DragIndicator';
 import { CANVAS_EMPTY_MESSAGE } from '../../utils/constants';
 import ClearButton from '../Header/ClearButton';
 import SaveButton from '../Header/SaveButton';
@@ -21,16 +20,17 @@ const Canvas = ({ item, onDrop, onDragStart, onRemove, onClear }) => {
   return (
     <div className="flex-1 flex flex-col p-6 gap-4">
       {/* Header */}
-      <div className="flex justify-between items-center mb-2">
-        <h1 className="text-base font-normal text-text mb-2">Testing Canvas</h1>
+      <div className="flex justify-between items-center mb-1 min-h-[38px]">
+        <h1 className="text-base font-normal text-text">Testing Canvas</h1>
 
-        {/* Action Buttons */}
-        {item && (
-          <div className="flex gap-1">
+        {
+          item && (<div className="flex gap-1">
             <ClearButton onClick={onClear} />
             <SaveButton onClick={() => console.log('Save clicked')} />
-          </div>
-        )}
+          </div>)
+        }
+
+
       </div>
 
       {/* Canvas Area */}
@@ -38,7 +38,7 @@ const Canvas = ({ item, onDrop, onDragStart, onRemove, onClear }) => {
         ref={canvasRef}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        className="flex-1 border-2 border-border rounded-canvas bg-canvasColor relative inset-5 overflow-hidden"
+        className="flex-1 border-2 border-border rounded-canvas bg-canvasColor relative overflow-hidden"
       >
         {/* Empty State */}
         {!item && (
@@ -46,7 +46,6 @@ const Canvas = ({ item, onDrop, onDragStart, onRemove, onClear }) => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-textSecondary text-base opacity-30 pointer-events-none">
               {CANVAS_EMPTY_MESSAGE}
             </div>
-            <DragIndicator />
           </>
         )}
 

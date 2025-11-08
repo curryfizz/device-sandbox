@@ -11,8 +11,9 @@ export const useDragAndDrop = () => {
   const handleDrop = (e, canvasRect) => {
     if (!draggedItem) return;
 
-    const x = e.clientX - canvasRect.left;
-    const y = e.clientY - canvasRect.top;
+    const x = canvasRect.width / 2 - (draggedItem.canvasComponentProps.size) / 2;
+    // const x = e.clientX - canvasRect.left;
+    const y = (canvasRect.height * 1) / 3;
 
     const newItem = {
       ...draggedItem,
@@ -22,7 +23,6 @@ export const useDragAndDrop = () => {
     };
 
     setCanvasItem(newItem);
-    console.log("Dropped item:", newItem);
     setDraggedItem(null);
   };
 

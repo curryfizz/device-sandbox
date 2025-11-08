@@ -5,10 +5,16 @@ const DeviceItem = ({ device, onDragStart, selectedId, setSelectedId }) => {
   const [isHovered, setIsHovered] = useState(false);
   const isSelected = selectedId === device.id;
 
+  const handleDragStart = (e) => {
+    onDragStart(device);
+    console.log('Dragging device:', device);
+    e.dataTransfer.effectAllowed = 'copy';
+  };
+
   return (
     <div
       draggable
-      onDragStart={() => onDragStart(device)}
+      onDragStart={handleDragStart}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => setSelectedId(device.id)}

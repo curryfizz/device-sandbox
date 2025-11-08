@@ -5,6 +5,7 @@ import { DEVICES } from '../../utils/constants';
 const DeviceList = ({ onDragStart }) => {
   const [selectedDevice, setSelectedDevice] = useState(null);
 
+    
   return (
     <div>
       <h3 className="text-base mb-4 text-text font-normal ">Devices</h3>
