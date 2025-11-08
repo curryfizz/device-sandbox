@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const useDragAndDrop = () => {
-  const [canvasItems, setCanvasItems] = useState([]);
+  const [canvasItem, setCanvasItem] = useState(null);
   const [draggedItem, setDraggedItem] = useState(null);
 
   const handleDragStart = (item) => {
@@ -14,53 +14,37 @@ export const useDragAndDrop = () => {
     const x = e.clientX - canvasRect.left;
     const y = e.clientY - canvasRect.top;
 
-    const centerX = canvasRect.width / 2;
-    const centerY = canvasRect.height / 2;
+    const newItem = {
+      ...draggedItem,
+      x,
+      y,
+      id: draggedItem.id || Date.now(), // ensure a unique id
+    };
 
-
-    const existingItem = canvasItems.find((i) => i.id === draggedItem.id);
-
-    if (existingItem) {
-      setCanvasItems(
-        canvasItems.map((item) =>
-          item.id === draggedItem.id
-            ? { ...item, x: centerX, y: centerY }
-            : item
-        )
-      );
-    } else {
-      // Add new item to canvas
-      const newItem = {
-        ...draggedItem,
-        id: `${draggedItem.id}-${Date.now()}`,
-        x: centerX,
-        y: centerY,
-      };
-      setCanvasItems([...canvasItems, newItem]);
-    }
-
+    setCanvasItem(newItem);
+    console.log("Dropped item:", newItem);
     setDraggedItem(null);
   };
 
-  const removeItem = (itemId) => {
-    setCanvasItems(canvasItems.filter((item) => item.id !== itemId));
+  const removeItem = () => {
+    setCanvasItem(null);
   };
 
   const clearCanvas = () => {
-    setCanvasItems([]);
+    setCanvasItem(null);
   };
 
-  const setItems = (items) => {
-    setCanvasItems(items);
+  const setItem = (item) => {
+    setCanvasItem(item);
   };
 
   return {
-    canvasItems,
+    canvasItem,
     draggedItem,
     handleDragStart,
     handleDrop,
     removeItem,
     clearCanvas,
-    setItems,
+    setItem,
   };
 };

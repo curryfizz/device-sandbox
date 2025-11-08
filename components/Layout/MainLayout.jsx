@@ -6,11 +6,12 @@ import { usePresets } from '../../hooks/usePresets';
 
 const MainLayout = () => {
   const {
-    canvasItems,
+    canvasItem,
     handleDragStart,
     handleDrop,
     removeItem,
-    setItems
+    clearCanvas,  
+    setItem       
   } = useDragAndDrop();
 
   const {
@@ -21,12 +22,14 @@ const MainLayout = () => {
   } = usePresets();
 
   const handleSavePreset = () => {
-    savePreset(canvasItems);
+    if (canvasItem) {
+      savePreset(canvasItem);
+    }
   };
 
   const handleLoadPreset = (preset) => {
-    const items = loadPreset(preset);
-    setItems(items);
+    const loadedItem = loadPreset(preset);
+    setItem(loadedItem);
   };
 
   return (
@@ -34,16 +37,17 @@ const MainLayout = () => {
       <Sidebar
         onDragStart={handleDragStart}
         presets={savedPresets}
-        canSave={canvasItems.length > 0}
+        canSave={canvasItem !== null}
         onSavePreset={handleSavePreset}
         onLoadPreset={handleLoadPreset}
         onDeletePreset={deletePreset}
       />
       <Canvas
-        items={canvasItems}
+        item={canvasItem}             
         onDrop={handleDrop}
         onDragStart={handleDragStart}
         onRemove={removeItem}
+        onClear={clearCanvas}         
       />
     </div>
   );

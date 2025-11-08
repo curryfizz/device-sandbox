@@ -3,8 +3,9 @@ import CanvasItem from './CanvasItem';
 import DragIndicator from './DragIndicator';
 import { CANVAS_EMPTY_MESSAGE } from '../../utils/constants';
 import ClearButton from '../Header/ClearButton';
+import SaveButton from '../Header/SaveButton';
 
-const Canvas = ({ items, onDrop, onDragStart, onRemove }) => {
+const Canvas = ({ item, onDrop, onDragStart, onRemove, onClear }) => {
   const canvasRef = useRef(null);
 
   const handleDragOver = (e) => {
@@ -23,11 +24,13 @@ const Canvas = ({ items, onDrop, onDragStart, onRemove }) => {
       <div className="flex justify-between items-center mb-2">
         <h1 className="text-base font-normal text-text mb-2">Testing Canvas</h1>
 
-
-        <div className="flex gap-2">
-          <ClearButton onClick={() => console.log('Clear clicked')} />
-
-        </div>
+        {/* Action Buttons */}
+        {item && (
+          <div className="flex gap-1">
+            <ClearButton onClick={onClear} />
+            <SaveButton onClick={() => console.log('Save clicked')} />
+          </div>
+        )}
       </div>
 
       {/* Canvas Area */}
@@ -35,27 +38,27 @@ const Canvas = ({ items, onDrop, onDragStart, onRemove }) => {
         ref={canvasRef}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        className="flex-1 border-2 border-border rounded-canvas bg-sidebar relative"
+        className="flex-1 border-2 border-border rounded-canvas bg-canvasColor relative inset-5 overflow-hidden"
       >
         {/* Empty State */}
-        {items.length === 0 && (
+        {!item && (
           <>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-textSecondary text-base pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-textSecondary text-base opacity-30 pointer-events-none">
               {CANVAS_EMPTY_MESSAGE}
             </div>
             <DragIndicator />
           </>
         )}
 
-        {/* Canvas Items */}
-        {items.map(item => (
+        {/* Canvas Item */}
+        {item && (
           <CanvasItem
             key={item.id}
             item={item}
             onDragStart={onDragStart}
             onRemove={onRemove}
           />
-        ))}
+        )}
       </div>
     </div>
   );
