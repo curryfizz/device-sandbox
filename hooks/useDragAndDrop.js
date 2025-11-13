@@ -13,7 +13,7 @@ export const useDragAndDrop = () => {
 
     const x = canvasRect.width / 2 - (draggedItem.canvasComponentProps.size) / 2;
     // const x = e.clientX - canvasRect.left;
-    const y = (canvasRect.height * 1) / 3;
+    const y = 0;
 
     const newItem = {
       ...draggedItem,
