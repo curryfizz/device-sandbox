@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import Canvas from '../Canvas/Canvas';
 import { useDragAndDrop } from '../../hooks/useDragAndDrop';
@@ -10,8 +10,8 @@ const MainLayout = () => {
     handleDragStart,
     handleDrop,
     removeItem,
-    clearCanvas,  
-    setItem       
+    clearCanvas,
+    setItem
   } = useDragAndDrop();
 
   const {
@@ -20,6 +20,9 @@ const MainLayout = () => {
     loadPreset,
     deletePreset
   } = usePresets();
+
+  // NEW: selected device state lifted here
+  const [selectedDevice, setSelectedDevice] = useState(null);
 
   const handleSavePreset = () => {
     if (canvasItem) {
@@ -32,22 +35,34 @@ const MainLayout = () => {
     setItem(loadedItem);
   };
 
+  const handleClearCanvas = () => {
+    clearCanvas();
+    setSelectedDevice(null); // reset active device
+  };
+
+  const handleDeviceDragStart = (device) => {
+    setSelectedDevice(device.id);
+    handleDragStart(device);
+  };
+
   return (
     <div className="flex h-screen bg-mainCanvas text-text font-sans">
       <Sidebar
-        onDragStart={handleDragStart}
+        onDragStart={handleDeviceDragStart}
         presets={savedPresets}
         canSave={canvasItem !== null}
         onSavePreset={handleSavePreset}
         onLoadPreset={handleLoadPreset}
         onDeletePreset={deletePreset}
+        selectedDevice={selectedDevice}          // pass down active device
+        setSelectedDevice={setSelectedDevice}   // allow DeviceList to update it
       />
       <Canvas
-        item={canvasItem}             
+        item={canvasItem}
         onDrop={handleDrop}
-        onDragStart={handleDragStart}
+        onDragStart={handleDeviceDragStart}
         onRemove={removeItem}
-        onClear={clearCanvas}         
+        onClear={handleClearCanvas}              // resets device selection
       />
     </div>
   );
