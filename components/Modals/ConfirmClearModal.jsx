@@ -14,10 +14,10 @@ const ConfirmClearModal = ({ isOpen, onConfirm, onCancel }) => {
       <div className="relative border bg-modalBackgroundColor rounded-canvas border-buttonBorder min-w-[530px] z-10 gap-3 shadow-lg">
         <h2 className="text-lg font-bold p-6">Clear Canvas?</h2>
         <hr className="border-t border-buttonBorder" />
-        <p className="p-6">
+        <p className="p-6 text-sm">
           Are you sure you want to clear the canvas? This action cannot be undone.
         </p>
-        <div className="flex justify-end gap-2 p-6">
+        <div className="flex justify-end gap-2 p-6 text-sm">
           <button
             onClick={onCancel}
             className="px-4 py-2 border rounded-buttonRadius text-clearButtonText hover:bg-buttonHover border-buttonBorder transition"
