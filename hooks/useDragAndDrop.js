@@ -12,7 +12,6 @@ export const useDragAndDrop = () => {
     if (!draggedItem) return;
     const x = canvasRect.width / 2 - (draggedItem?.canvasComponentProps?.size) / 2;
     const y = canvasRect.height / 2 - (draggedItem?.canvasComponentProps?.size) / 2;
-    console.log(x, y);
 
     const newItem = {
       ...draggedItem,

@@ -7,7 +7,6 @@ const DeviceItem = ({ device, onDragStart, selectedId, setSelectedId }) => {
 
   const handleDragStart = (e) => {
     onDragStart(device);
-    console.log('Dragging device:', device);
     e.dataTransfer.effectAllowed = 'copy';
   };
 

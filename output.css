@@ -562,6 +562,10 @@ html {
   pointer-events: none;
 }
 
+.static {
+  position: static;
+}
+
 .absolute {
   position: absolute;
 }
@@ -988,10 +992,6 @@ html {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
-.accent-blue-500 {
-  accent-color: #3b82f6;
-}
-
 .opacity-30 {
   opacity: 0.3;
 }
@@ -1190,10 +1190,9 @@ input[type='range']::-webkit-slider-thumb {
   width: 16px;
   background-color: white;
   border: 2px solid var(--thumb-border-color, transparent);
-  padding: 2px;
   border-radius: 50%;
   cursor: pointer;
-  margin-top: -1px;
+  margin-top: -2px;
 }
 
 /* Firefox thumb */

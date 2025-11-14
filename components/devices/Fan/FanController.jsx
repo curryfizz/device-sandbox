@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const FanController = ({ controls }) => {
     const { props, onUpdateItem } = controls;
-    const { isOn, speed = 1 } = props; // only pick what you need
+    const { isOn, speed = 1 } = props; 
     const handleToggle = () => onUpdateItem({ isOn: !isOn });
     const handleSpeedChange = (value) => onUpdateItem({ speed: value });
 
@@ -38,9 +38,9 @@ const FanController = ({ controls }) => {
                     step="1"
                     value={speed}
                     onChange={(e) => handleSpeedChange(parseInt(e.target.value))}
-                    className="w-full h-4 cursor-pointer rounded-3xl"
+                    className="w-full h-4 cursor-pointer"
                     style={{
-                        background: `linear-gradient(to right, #3B82F6 0%, #3B82F6 ${speed - .5}%, #374151 ${speed - .5}%, #374151 100%)`,
+                        background: `linear-gradient(to right, #3B82F6 0%, #3B82F6 ${speed - .1}%, #374151 ${speed - .1}%, #374151 100%)`,
                         '--thumb-border-color': speed>0 ? '#3B82F6' : '#3E495B'
                     }}
                 />

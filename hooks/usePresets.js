@@ -17,7 +17,6 @@ export const usePresets = () => {
   };
 
   const loadPreset = (preset) => {
-    console.log(...preset.items);
     return [...preset.items];
   };
 
