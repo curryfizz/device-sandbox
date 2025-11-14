@@ -1,4 +1,6 @@
 import Fan from "../components/devices/Fan/Fan";
+import FanController from "../components/devices/Fan/FanController";
+import FanWithRotation from "../components/devices/Fan/FanWithRotation";
 import Light from "../components/devices/Light/Light";
 import Lightbulb from "../components/devices/Light/Lightbulb";
 import LightController from "../components/devices/Light/LightController";
@@ -15,7 +17,10 @@ export const DEVICES = [
   { 
     id: 'fan', 
     name: 'Fan', 
-    component: Fan    
+    component: Fan   ,
+    canvasComponent: FanWithRotation,
+    canvasComponentProps: {size: 400},
+    controller: FanController
   }
 ];
 

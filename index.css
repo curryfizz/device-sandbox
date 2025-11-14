@@ -14,6 +14,8 @@
   html {
     font-family: 'Inter', sans-serif;
   }
+
+
 }
 
 body {
@@ -21,14 +23,15 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden; /* Prevent scrollbars on main body */
+  overflow: hidden;
+  /* Prevent scrollbars on main body */
 }
 
 #root {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  
+
 }
 
 /* Custom Scrollbar Styles (Optional but nice for dark theme) */
@@ -76,9 +79,12 @@ body {
 
 /* Optional: Pulse animation for drag indicator */
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.8;
   }
@@ -94,6 +100,7 @@ body {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -106,11 +113,68 @@ body {
 
 /* Optional: Shake animation for invalid drop */
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
 }
 
 .shake {
   animation: shake 0.3s ease-in-out;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  /* Chrome, Safari, Opera */
+  -moz-appearance: none;
+  /* Firefox */
+  appearance: none;
+  width: 100%;
+  height: 16px;
+  background-color: #3E495B;
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  background-color: white;
+  border: 2px solid var(--thumb-border-color, transparent);
+  padding: 2px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -1px;
+}
+
+/* Firefox thumb */
+input[type='range']::-moz-range-thumb {
+  -moz-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  background-color: white;
+  border: 2px solid var(--thumb-border-color, transparent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Optional: Firefox track fix */
+input[type='range']::-moz-range-track {
+  background-color: #e5e7eb;
+  /* Tailwind gray-200 */
+  height: 16px;
+  border-radius: 9999px;
 }
