@@ -6,9 +6,8 @@ const Lightbulb = ({
   brightness = 0, // optional brightness 0–100
   color = '#FFE5B4',
 }) => {
-  const glowOpacity = 0.3 * brightness/100;
-  const innerGlowOpacity = 0.6 * brightness/100;
-  console.log(color)
+  const glowOpacity = 0.3 * brightness / 100;
+  const innerGlowOpacity = 0.6 * brightness / 100;
 
   return (
     <svg

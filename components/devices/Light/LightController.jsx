@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const LightController = ({ controls }) => {
     const { props, onUpdateItem } = controls;
-    const { isOn, brightness=0, color } = props; // only pick what you need
+    const { isOn, brightness = 0, color } = props; // only pick what you need
     const handleToggle = () => onUpdateItem({ isOn: !isOn });
     const handleBrightnessChange = (value) => onUpdateItem({ brightness: value });
     const handleColorChange = (newColor) => onUpdateItem({ color: newColor });
@@ -60,12 +60,16 @@ const LightController = ({ controls }) => {
                 </div>
                 <input
                     type="range"
-                    min="0"
+                    min="1"
                     max="100"
                     step="1"
                     value={brightness}
                     onChange={(e) => handleBrightnessChange(parseInt(e.target.value))}
-                    className="w-full mt-2 accent-blue-500"
+                    className="w-full h-4 cursor-pointer rounded-3xl"
+                    style={{
+                        background: `linear-gradient(to right, #3B82F6 0%, #3B82F6 ${brightness - .1}%, #374151 ${brightness - .1}%, #374151 100%)`,
+                        '--thumb-border-color': brightness>0 ? '#3B82F6' : '#3E495B'
+                    }}
                 />
             </div>
         </div>
