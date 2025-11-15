@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startDraggingDevice } from '../../store/devicesSlice';
-import { DEVICE_COMPONENTS } from '../../configs/deviceMappings';
+import { DEVICE_COMPONENTS, ID_MAPPINGS } from '../../configs/deviceMappings';
 
 const DeviceItem = ({ device, className }) => {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
 
-  const DeviceComponent = device.id ? DEVICE_COMPONENTS[device.id] : null;
+  const DeviceComponent = device.id ? DEVICE_COMPONENTS[ID_MAPPINGS[device.id]] : null;
+
   const canvasItem = useSelector(state => state.devices.canvasItem);
 
   const isSelected =
@@ -22,7 +23,7 @@ const DeviceItem = ({ device, className }) => {
 
 
   return (
-    <div className="relative">
+    <div className="relative overflow-visible">
       {/* Blue selection dot */}
       {isSelected && (
         <div className="absolute left-[-10px] top-1/2 transform -translate-y-1/2 w-[6px] h-[6px] bg-blue-500 rounded-full" />
@@ -34,14 +35,13 @@ const DeviceItem = ({ device, className }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={`
-    flex items-center gap-3 p-3 border rounded-buttonRadius
-    cursor-${device.id ? 'grab' : 'default'} transition-colors duration-200
-    ${isSelected ? 'bg-buttonHover border-buttonBorder' : 'bg-buttonColor border-buttonBorder'}
-    ${device.id ? 'hover:bg-buttonHover active:cursor-grabbing' : ''}
-    ${className}   /* <-- USER CLASSES LAST */
-  `}
-
-
+            flex items-center gap-3 p-3 border rounded-buttonRadius
+            transition-colors duration-200
+            cursor-pointer
+            ${isSelected ? 'bg-buttonHover border-buttonBorder' : 'bg-buttonColor border-buttonBorder'}
+            ${device.id ? 'hover:bg-buttonHover active:cursor-grabbing' : ''}
+            ${className}
+        `}
       >
         {DeviceComponent && (
           <DeviceComponent hovered={isHovered} selected={isSelected} />

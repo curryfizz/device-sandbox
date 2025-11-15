@@ -1,4 +1,3 @@
-import React from 'react';
 import GenericButton from './GenericButton';
 
 const SaveButton = ({ onClick }) => {

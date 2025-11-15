@@ -1,5 +1,3 @@
-
-
 const Motor = () => (
   <svg width="156" height="156" viewBox="0 0 156 156" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g filter="url(#filter0_d_5_594)">

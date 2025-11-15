@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import GenericButton from "../Buttons/GenericButton";
 import SaveButton from "../Buttons/SaveButton";
 import { closeSaveModal } from "../../store/uiSlice";
-import { presetAPI } from "../../services/api";
 import { useDispatch, useSelector } from "react-redux";
-import Toast from "../Toasts/Toast";
-import { hideToast, showToast } from "../../store/toastSlice";
+import {showToast } from "../../store/toastSlice";
 import { savePreset } from "../../store/presetsSlice";
 
 const ConfirmSaveModal = ({ isOpen }) => {

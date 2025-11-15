@@ -28,9 +28,6 @@ const devicesSlice = createSlice({
     clearCanvas: (state) => {
       state.canvasItem = null;
     },
-    setCanvasItem: (state, action) => {
-      state.canvasItem = action.payload;
-    },
 
     updateDevice: (state, action) => {
       if (state.canvasItem) {
@@ -44,12 +41,9 @@ const devicesSlice = createSlice({
 });
 
 export const {
-  selectDevice,
   startDraggingDevice,
   dropDevice,
-  removeCanvasItem,
   clearCanvas,
-  setCanvasItem,
   updateDevice, // export it
 } = devicesSlice.actions;
 

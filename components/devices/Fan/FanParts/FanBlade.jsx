@@ -1,4 +1,4 @@
-const FanBlade = ({ index }) => {
+const FanBlade = () => {
 
   return (
     <svg width="150" height="72" viewBox="0 0 150 72" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,5 +1,3 @@
-// deviceMappings.js
-
 import Fan from "../components/devices/Fan/Fan";
 import FanController from "../components/devices/Fan/FanController";
 import FanWithRotation from "../components/devices/Fan/FanWithRotation";

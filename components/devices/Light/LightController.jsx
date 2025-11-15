@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 const LightController = ({ controls }) => {
     const { props, onUpdateItem } = controls;
     const { isOn, brightness = 0, color } = props; // only pick what you need

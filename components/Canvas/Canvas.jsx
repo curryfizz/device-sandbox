@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import CanvasItem from './CanvasItem';
 import { CANVAS_EMPTY_MESSAGE } from '../../configs/devicesProps';
 

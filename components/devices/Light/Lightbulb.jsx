@@ -1,9 +1,7 @@
-import React from 'react';
-
 const Lightbulb = ({
   size = 200,
   isOn = false,
-  brightness = 0, // optional brightness 0–100
+  brightness = 0, 
   color = '#FFE5B4',
 }) => {
   const glowOpacity = 0.3 * brightness / 100;

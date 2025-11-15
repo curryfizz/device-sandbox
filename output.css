@@ -698,6 +698,10 @@ html {
   height: 100vh;
 }
 
+.max-h-\[720px\] {
+  max-height: 720px;
+}
+
 .min-h-\[38px\] {
   min-height: 38px;
 }
@@ -872,6 +876,14 @@ html {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-visible {
+  overflow: visible;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .rounded-2xl {
@@ -1141,10 +1153,6 @@ html {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.\!text-opacity-30 {
-  --tw-text-opacity: 0.3 !important;
 }
 
 .text-opacity-30 {

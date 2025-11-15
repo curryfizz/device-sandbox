@@ -1,4 +1,3 @@
-import React from 'react';
 import DeviceItem from './DeviceItem';
 import { DEVICES } from '../../configs/devicesProps';
 

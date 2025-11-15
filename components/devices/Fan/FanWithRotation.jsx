@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import FanBlade from './FanParts/FanBlade';
 import Motor from './FanParts/Motor';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 
 const ConfirmDropModal = ({ isOpen, onConfirm, onCancel, elementName }) => {
     if (!isOpen) return null;

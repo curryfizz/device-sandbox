@@ -1,10 +1,9 @@
-import React from 'react';
 import DeviceList from './DeviceList';
 import SavedPresets from './SavedPresets';
 
 const Sidebar = ({ }) => {
   return (
-    <div className="w-[227px] bg-sidebar border-r border-border p-4 flex flex-col gap-8">
+    <div className="w-[227px] bg-sidebar border-r border-border p-4 flex flex-col gap-8 overflow-y-auto">
       {/* Device list*/}
       <DeviceList />
 

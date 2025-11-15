@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import {
   updateDevice,
@@ -24,7 +23,7 @@ const CanvasItem = ({ item }) => {
 
   return (
     <>
-      {/* Render the device on canvas */}
+      {/* Device */}
       <div
         style={{
           position: "absolute",
@@ -44,7 +43,7 @@ const CanvasItem = ({ item }) => {
         </div>
       </div>
 
-      {/* Controller UI */}
+      {/* Controller */}
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-50">
         <ComponentController
           controls={{
