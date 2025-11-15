@@ -13,7 +13,7 @@ const Lightbulb = ({
       height={size}
       viewBox="0 0 640 640"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+      >
       <g opacity={isOn ? glowOpacity : 0} filter="url(#filter0_f_0_1)">
         <path
           d="M128 320C128 213.961 213.961 128 320 128C426.039 128 512 213.961 512 320C512 426.039 426.039 512 320 512C213.961 512 128 426.039 128 320Z"

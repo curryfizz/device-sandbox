@@ -33,9 +33,7 @@ const ConfirmSaveModal = ({ isOpen }) => {
                 ],
             };
 
-            // console.log("Saved preset:", result.payload);
             const result = await dispatch(savePreset(payload));
-            console.log(result)
             dispatch(closeSaveModal());
             dispatch(showToast({ message: 'Preset saved!', type: 'success' }));
 

@@ -12,25 +12,22 @@ const SavedPresets = () => {
     dispatch(loadPresets());
   }, [dispatch]);
 
-  console.log(presets)
   return (
     <div>
       <h3 className="text-base mb-4 text-text font-normal">Saved Presets</h3>
       <div className="flex flex-col gap-3 max-h-[720px]">
         {presets?.length ? (
           presets.map((preset) => (
-            <div
+            <DeviceItem
               key={preset.id}
-            >
-              <DeviceItem
-                device={{
-                  id: preset.id,
-                  type: preset.devices?.[0].type,
-                  name: preset.name,
-                  settings: preset.devices?.[0].settings || {},
-                }}
-              />
-            </div>
+              device={{
+                id: preset.id,
+                type: preset.devices?.[0].type,
+                name: preset.name,
+                settings: preset.devices?.[0].settings || {},
+              }}
+            />
+
           ))
         ) : (
           <DeviceItem

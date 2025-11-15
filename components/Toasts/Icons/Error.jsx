@@ -1,6 +1,6 @@
 const ErrorSVG = ({ size = 32 }) => {
     return (
-        <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={size} height={size} viewBox="0 0 32 32" fill="none" >
             <rect width="32" height="32" rx="16" fill="#303746" />
             <mask id="mask0_12_8" type="alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
                 <rect x="4" y="4" width="24" height="24" fill="#D9D9D9" />

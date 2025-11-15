@@ -1,5 +1,5 @@
 const Motor = () => (
-  <svg width="156" height="156" viewBox="0 0 156 156" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="156" height="156" viewBox="0 0 156 156" fill="none" >
     <g filter="url(#filter0_d_5_594)">
       <mask id="path-1-inside-1_5_594" fill="white">
         <path d="M78 93C55.9086 93 38 75.0914 38 53C38 30.9086 55.9086 13 78 13C100.091 13 118 30.9086 118 53C118 75.0914 100.091 93 78 93Z" />

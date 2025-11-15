@@ -6,22 +6,21 @@ import { DEVICE_COMPONENTS } from '../../configs/deviceMappings';
 const DeviceItem = ({ device, className }) => {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
-  console.log(device)
+  // const [isSelected, setIsSelected] = useState(false);
   const DeviceComponent = device.id ? DEVICE_COMPONENTS[device.type] : null;
 
   const canvasItem = useSelector(state => state.devices.canvasItem);
 
-  const isSelected = canvasItem && device && canvasItem.type === device.type && canvasItem.name === device.name;
+  const isSelected = canvasItem && device && canvasItem.name === device.name;
 
   const handleDragStart = (e) => {
     dispatch(startDraggingDevice(device));
-
     e.dataTransfer.effectAllowed = 'copy';
   };
 
 
   return (
-    <div className="relative overflow-visible">
+    <div className="relative">
       {/* Blue selection dot */}
       {isSelected && (
         <div className="absolute left-[-10px] top-1/2 transform -translate-y-1/2 w-[6px] h-[6px] bg-blue-500 rounded-full" />

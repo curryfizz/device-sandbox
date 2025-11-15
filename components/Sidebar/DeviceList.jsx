@@ -16,9 +16,15 @@ const DeviceList = () => {
   return (
     <div>
       <h3 className="text-base mb-4 text-text font-normal">Devices</h3>
-      <div className="flex flex-col gap-3 max-h-[720px] overflow-y-auto">
+      <div className="flex flex-col gap-3">
         {devices.map((device) => (
-          <DeviceItem key={device.id} device={device} />
+          <DeviceItem key={device.id}
+            device={{
+              id: device.id,
+              type: device.type,
+              name: device.name,
+              settings: device.settings,
+            }} />
         ))}
       </div>
     </div>

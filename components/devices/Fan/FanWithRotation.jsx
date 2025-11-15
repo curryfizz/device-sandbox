@@ -73,7 +73,7 @@ const FanWithRotation = ({ size = 640, isOn = false, speed = 1 }) => {
       height={size}
       viewBox={`0 0 ${scaledSize} ${scaledSize}`}
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      
     >
       <style>{trailStyle}</style>
 

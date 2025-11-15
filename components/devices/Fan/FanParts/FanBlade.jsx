@@ -1,7 +1,7 @@
 const FanBlade = () => {
 
   return (
-    <svg width="150" height="72" viewBox="0 0 150 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="150" height="72" viewBox="0 0 150 72" fill="none" >
       <g filter="url(#filter0_di_19_6)">
         <path d="M142 62L36 62C20.536 62 8 49.464 8 34C8 18.536 20.536 6 36 6L142 5.99999L142 62Z" fill="url(#paint0_linear_19_6)" />
         <g opacity="0.2">

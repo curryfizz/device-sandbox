@@ -12,6 +12,7 @@ export const fetchDevices = createAsyncThunk(
 
 const initialState = {
   list: [],          // all devices fetched from DB
+  idMappings: {},    // id -> name mapping
   canvasItem: null,  // currently on-canvas item
   draggedItem: null, // currently dragging item
 };
@@ -46,18 +47,6 @@ const devicesSlice = createSlice({
         };
       }
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchDevices.fulfilled, (state, action) => {
-      state.list = action.payload;
-
-      // dynamically create ID -> name mapping
-      console.log(action.payload)
-      state.idMappings = action.payload.reduce((acc, device) => {
-        acc[device.id] = device.name;
-        return acc;
-      }, {});
-    });
   },
 });
 
