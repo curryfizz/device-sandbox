@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  startDraggingDevice,
+} from '../../store/devicesSlice';
+import { DEVICE_COMPONENTS } from '../../configs/deviceMappings';
 
-const DeviceItem = ({ device, onDragStart, selectedId, setSelectedId }) => {
-  const DeviceComponent = device.component;
+const DeviceItem = ({ device }) => {
+  const dispatch = useDispatch();
+
   const [isHovered, setIsHovered] = useState(false);
 
+  const selectedId = useSelector(state => state.devices.selectedId);
   const isSelected = selectedId === device.id;
 
+  const DeviceComponent = DEVICE_COMPONENTS[device.id];
+
   const handleDragStart = (e) => {
-    setSelectedId(device.id); // select on drag
-    onDragStart(device);
+    dispatch(startDraggingDevice(device));     
     e.dataTransfer.effectAllowed = 'copy';
   };
 
   return (
-    <div className="relative"> {/* relative container for absolute dot */}
-      {/* Blue dot outside the button */}
+    <div className="relative">
+      {/* Blue selection dot */}
       {isSelected && (
         <div className="absolute left-[-10px] top-1/2 transform -translate-y-1/2 w-[6px] h-[6px] bg-blue-500 rounded-full" />
       )}

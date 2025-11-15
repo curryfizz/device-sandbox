@@ -1,30 +1,54 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import CanvasItem from './CanvasItem';
-import { CANVAS_EMPTY_MESSAGE } from '../../utils/constants';
-import ClearButton from '../Header/ClearButton';
-import SaveButton from '../Header/SaveButton';
-import ConfirmClearModal from '../Modals/ConfirmClearModal';
+import { CANVAS_EMPTY_MESSAGE } from '../../configs/devicesProps';
 
-const Canvas = ({ item, onDrop, onDragStart, onRemove, onClear }) => {
+// Buttons & modals
+import GenericButton from '../Buttons/GenericButton';
+import SaveButton from '../Buttons/SaveButton';
+import ConfirmClearModal from '../Modals/ConfirmClearModal';
+import ConfirmSaveModal from '../Modals/ConfirmSaveModal';
+
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import {
+  dropDevice,
+  removeCanvasItem,
+  clearCanvas,
+} from "../../store/devicesSlice";
+import { openSaveModal, closeSaveModal, openClearModal, closeClearModal } from "../../store/uiSlice";
+
+const Canvas = () => {
+  const dispatch = useDispatch();
   const canvasRef = useRef(null);
-  const [isModalOpen, setModalOpen] = useState(false);
+  const canvasItemRef = useRef(null);
+
+  
+  const canvasItem = useSelector(state => state.devices.canvasItem);
+  const draggedItem = useSelector(state => state.devices.draggedItem);
+  const isClearModalOpen = useSelector(state => state.ui.clearModalOpen);
+  const isSaveModalOpen = useSelector(state => state.ui.saveModalOpen);
 
   const handleDragOver = (e) => e.preventDefault();
 
   const handleDrop = (e) => {
     e.preventDefault();
-    if (canvasRef.current) {
-      const rect = canvasRef.current.getBoundingClientRect();
-      onDrop(e, rect);
+    if (!canvasRef.current || !draggedItem) return;
+    
+    const canvasRect = canvasRef.current.getBoundingClientRect();  
+    const rect = {
+      width: canvasRect.width,
+      height: canvasRect.height
     }
+    dispatch(dropDevice({ canvasRect:rect }));
   };
 
-  const openClearModal = () => setModalOpen(true);
-  const closeClearModal = () => setModalOpen(false);
+  const handleClear = () => {
+    dispatch(clearCanvas());
+    dispatch(closeClearModal());
+  };
 
-  const confirmClear = () => {
-    onClear();
-    closeClearModal();
+  const handleSavePreset = (presetName) => {
+    dispatch(closeSaveModal());
   };
 
   return (
@@ -32,10 +56,11 @@ const Canvas = ({ item, onDrop, onDragStart, onRemove, onClear }) => {
       {/* Header */}
       <div className="flex justify-between items-center mb-1 min-h-[38px]">
         <h1 className="text-base font-normal text-text">Testing Canvas</h1>
-        {item && (
+
+        {canvasItem && (
           <div className="flex gap-1">
-            <ClearButton onClick={openClearModal} />
-            <SaveButton onClick={() => console.log('Save clicked')} />
+            <GenericButton text='Clear' onClick={() => dispatch(openClearModal())} />
+            <SaveButton onClick={() => dispatch(openSaveModal())} />
           </div>
         )}
       </div>
@@ -45,34 +70,35 @@ const Canvas = ({ item, onDrop, onDragStart, onRemove, onClear }) => {
         ref={canvasRef}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        className={`flex-1 border-2 border-border rounded-canvas bg-canvasColor relative overflow-hidden transition-all duration-200 ${
-          isModalOpen ? 'filter blur-sm' : ''
-        }`}
+        className={`flex-1 border-2 border-border rounded-canvas bg-canvasColor relative overflow-hidden transition-all duration-200 
+          ${(isClearModalOpen || isSaveModalOpen) ? 'filter blur-sm' : ''}`}
       >
-        {/* Empty State */}
-        {!item && (
+        {!canvasItem && (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-textSecondary text-base opacity-30 pointer-events-none">
             {CANVAS_EMPTY_MESSAGE}
           </div>
         )}
 
-        {/* Canvas Item */}
-        {item && (
+        {canvasItem && (
           <CanvasItem
-            key={item.id}
-            item={item}
-            onDragStart={onDragStart}
-            onRemove={onRemove}
+            ref={canvasItemRef}
+            item={canvasItem}
           />
         )}
       </div>
 
-      {/* Confirmation Modal */}
+      {/* Modals */}
       <ConfirmClearModal
-        isOpen={isModalOpen}
-        onConfirm={confirmClear}
-        onCancel={closeClearModal}
+        isOpen={isClearModalOpen}
+        onConfirm={handleClear}
+        onCancel={() => dispatch(closeClearModal())}
         parentRef={canvasRef}
+      />
+      <ConfirmSaveModal
+        isOpen={isSaveModalOpen}
+        onCancel={() => dispatch(closeSaveModal())}
+        onSavePreset={handleSavePreset}
+        itemRef={canvasItemRef}
       />
     </div>
   );

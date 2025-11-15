@@ -6,7 +6,6 @@ const FanController = ({ controls }) => {
     const handleToggle = () => onUpdateItem({ isOn: !isOn });
     const handleSpeedChange = (value) => onUpdateItem({ speed: value });
 
-
     return (
         <div className="w-[448px] h-[138.4px] bg-buttonColor rounded-canvas p-6 border border-buttonBorder transition-all text-textSecondary font-medium text-sm gap-5">
             {/* Power toggle */}

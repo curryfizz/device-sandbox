@@ -1,24 +1,15 @@
 import React from 'react';
 import DeviceList from './DeviceList';
-import SavedPresets from './SavedPresets';
+// import SavedPresets from './SavedPresets'; // Commented out for now
 
-const Sidebar = ({
-  onDragStart,
-  presets,
-  canSave,
-  onSavePreset,
-  onLoadPreset,
-  onDeletePreset,
-  selectedDevice,       // Active device ID from MainLayout
-  setSelectedDevice     // Setter to update active device
-}) => {
+const Sidebar = ({}) => {
   return (
     <div className="w-[227px] bg-sidebar border-r border-border p-4 flex flex-col gap-8">
-      <DeviceList
-        onDragStart={onDragStart}
-        selectedId={selectedDevice}        // pass active device
-        setSelectedId={setSelectedDevice}  // allow selection updates
-      />
+      {/* Device list is fully Redux-driven */}
+      <DeviceList/>
+
+      {/* SavedPresets temporarily disabled */}
+      {/*
       <SavedPresets
         presets={presets}
         canSave={canSave}
@@ -26,6 +17,7 @@ const Sidebar = ({
         onLoad={onLoadPreset}
         onDelete={onDeletePreset}
       />
+      */}
     </div>
   );
 };

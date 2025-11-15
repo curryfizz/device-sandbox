@@ -18,22 +18,11 @@ const MainLayout = () => {
     savedPresets,
     savePreset,
     loadPreset,
-    deletePreset
   } = usePresets();
 
   // NEW: selected device state lifted here
   const [selectedDevice, setSelectedDevice] = useState(null);
 
-  const handleSavePreset = () => {
-    if (canvasItem) {
-      savePreset(canvasItem);
-    }
-  };
-
-  const handleLoadPreset = (preset) => {
-    const loadedItem = loadPreset(preset);
-    setItem(loadedItem);
-  };
 
   const handleClearCanvas = () => {
     clearCanvas();
@@ -47,22 +36,14 @@ const MainLayout = () => {
 
   return (
     <div className="flex h-screen bg-mainCanvas text-text font-sans">
-      <Sidebar
-        onDragStart={handleDeviceDragStart}
-        presets={savedPresets}
-        canSave={canvasItem !== null}
-        onSavePreset={handleSavePreset}
-        onLoadPreset={handleLoadPreset}
-        onDeletePreset={deletePreset}
-        selectedDevice={selectedDevice}          // pass down active device
-        setSelectedDevice={setSelectedDevice}   // allow DeviceList to update it
-      />
+      <Sidebar/>
       <Canvas
         item={canvasItem}
         onDrop={handleDrop}
         onDragStart={handleDeviceDragStart}
         onRemove={removeItem}
-        onClear={handleClearCanvas}              // resets device selection
+        onClear={handleClearCanvas}
+        onSavePreset={savePreset} // pass it down
       />
     </div>
   );

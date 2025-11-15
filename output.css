@@ -600,10 +600,6 @@ html {
   pointer-events: auto;
 }
 
-.fixed {
-  position: fixed;
-}
-
 .absolute {
   position: absolute;
 }
@@ -668,10 +664,6 @@ html {
   margin-top: 0.5rem;
 }
 
-.mt-4 {
-  margin-top: 1rem;
-}
-
 .inline-block {
   display: inline-block;
 }
@@ -696,6 +688,10 @@ html {
   height: 1.5rem;
 }
 
+.h-\[124px\] {
+  height: 124px;
+}
+
 .h-\[138\.4px\] {
   height: 138.4px;
 }
@@ -712,8 +708,16 @@ html {
   height: 48px;
 }
 
+.h-\[64px\] {
+  height: 64px;
+}
+
 .h-\[6px\] {
   height: 6px;
+}
+
+.h-\[86px\] {
+  height: 86px;
 }
 
 .h-screen {
@@ -722,6 +726,10 @@ html {
 
 .min-h-\[38px\] {
   min-height: 38px;
+}
+
+.min-h-\[42px\] {
+  min-height: 42px;
 }
 
 .w-0 {
@@ -748,10 +756,6 @@ html {
   width: 448px;
 }
 
-.w-\[64px\] {
-  width: 64px;
-}
-
 .w-\[6px\] {
   width: 6px;
 }
@@ -764,12 +768,16 @@ html {
   width: 100%;
 }
 
+.min-w-\[482px\] {
+  min-width: 482px;
+}
+
 .min-w-\[530px\] {
   min-width: 530px;
 }
 
-.min-w-\[400px\] {
-  min-width: 400px;
+.min-w-\[64px\] {
+  min-width: 64px;
 }
 
 .flex-1 {
@@ -858,6 +866,12 @@ html {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
 }
 
 .overflow-hidden {
@@ -960,6 +974,11 @@ html {
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
+}
+
+.bg-buttonBorder {
+  --tw-bg-opacity: 1;
+  background-color: rgb(54 65 83 / var(--tw-bg-opacity, 1));
 }
 
 .bg-buttonColor {
@@ -1128,6 +1147,11 @@ html {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
 .blur-sm {
   --tw-blur: blur(4px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -1135,11 +1159,6 @@ html {
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.backdrop-blur-sm {
-  --tw-backdrop-blur: blur(4px);
-  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
 .transition {
@@ -1355,6 +1374,11 @@ input[type='range']::-moz-range-track {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\:border-buttonHover:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(100 111 127 / var(--tw-border-opacity, 1));
+}
+
 .hover\:bg-buttonHover:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(100 111 127 / var(--tw-bg-opacity, 1));
@@ -1363,6 +1387,15 @@ input[type='range']::-moz-range-track {
 .hover\:bg-red-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
+}
+
+.focus\:border:focus {
+  border-width: 1px;
+}
+
+.focus\:border-buttonHover:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(100 111 127 / var(--tw-border-opacity, 1));
 }
 
 .active\:cursor-grabbing:active {
