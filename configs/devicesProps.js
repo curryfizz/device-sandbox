@@ -1,6 +1,6 @@
 export const DEVICES = [
   {
-    id: "light",
+    id: 1,
     name: "Light",
     props: {
       size: 800,
@@ -10,7 +10,7 @@ export const DEVICES = [
     },
   },
   {
-    id: "fan",
+    id: 2,
     name: "Fan",
     props: {
       size: 400,

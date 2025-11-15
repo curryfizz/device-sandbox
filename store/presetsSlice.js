@@ -11,12 +11,12 @@ export const loadPresets = createAsyncThunk(
 
 export const savePreset = createAsyncThunk(
   "presets/savePreset",
-  async (payload) => await presetAPI.save(payload)
+  async (payload) => await presetAPI.savePreset(payload)
 );
 
 export const loadPreset = createAsyncThunk(
   "presets/loadPreset",
-  async (id) => await presetAPI.load(id)
+  async (id) => await presetAPI.getPreset(id)
 );
 
 const presetsSlice = createSlice({
@@ -33,10 +33,10 @@ const presetsSlice = createSlice({
         state.list = action.payload;
       })
       .addCase(savePreset.fulfilled, (state, action) => {
-        state.list.push(action.payload);
+        state.list.push(action.payload.data);
       })
       .addCase(loadPreset.fulfilled, (state, action) => {
-        state.loaded = action.payload;
+        state.loaded = action.payload.data;
       });
   }
 });

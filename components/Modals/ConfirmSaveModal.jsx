@@ -6,6 +6,7 @@ import { presetAPI } from "../../services/api";
 import { useDispatch, useSelector } from "react-redux";
 import Toast from "../Toasts/Toast";
 import { hideToast, showToast } from "../../store/toastSlice";
+import { savePreset } from "../../store/presetsSlice";
 
 const ConfirmSaveModal = ({ isOpen }) => {
     const dispatch = useDispatch();
@@ -34,10 +35,10 @@ const ConfirmSaveModal = ({ isOpen }) => {
                     },
                 ],
             };
-            console.log(payload)
 
-            // const result = await dispatch(savePreset(payload));
             // console.log("Saved preset:", result.payload);
+            const result = await dispatch(savePreset(payload));
+            console.log(result)
             dispatch(closeSaveModal());
             dispatch(showToast({ message: 'Preset saved!', type: 'success' }));
 
@@ -46,6 +47,9 @@ const ConfirmSaveModal = ({ isOpen }) => {
             console.error(err);
             dispatch(closeSaveModal());
             dispatch(showToast({ message: 'Failed to save preset', type: 'error' }));
+        } finally {
+            setPresetName("");
+            setShowErrorText(false)
         }
     };
 

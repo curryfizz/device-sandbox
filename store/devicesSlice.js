@@ -24,9 +24,7 @@ const devicesSlice = createSlice({
       state.canvasItem = { ...dragged, x, y, id: dragged.id || Date.now() };
       state.draggedItem = null;
     },
-    removeCanvasItem: (state) => {
-      state.canvasItem = null;
-    },
+
     clearCanvas: (state) => {
       state.canvasItem = null;
     },

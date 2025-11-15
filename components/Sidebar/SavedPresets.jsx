@@ -13,23 +13,6 @@ const SavedPresets = () => {
     dispatch(loadPresets());
   }, [dispatch]);
 
-  const handleLoadPreset = async (preset) => {
-    try {
-      const result = dispatch(loadPreset(preset.id));
-      const presetData = result.payload;
-
-      if (!presetData?.devices?.length) return;
-
-      dispatch(
-        setCanvasItem({
-          ...presetData.devices[0],
-          name: preset.name,
-        })
-      );
-    } catch (err) {
-      console.error('Failed to load preset', err);
-    }
-  };
 
   return (
     <div className="flex flex-col gap-3">
@@ -40,7 +23,6 @@ const SavedPresets = () => {
         presets.map((preset) => (
           <div
             key={preset.id}
-            onClick={() => handleLoadPreset(preset)}
           >
             <DeviceItem
               device={{
@@ -58,6 +40,7 @@ const SavedPresets = () => {
             name: PRESETS_EMPTY_MESSAGE,
             props: {},
           }}
+          className="bg-transparent border-buttonBorder text-textSecondary text-opacity-30 cursor-not-allowed"
         />
       )}
     </div>

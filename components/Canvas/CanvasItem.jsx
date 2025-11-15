@@ -4,12 +4,12 @@ import {
   updateDevice,
   startDraggingDevice,
 } from "../../store/devicesSlice";
-import { CANVAS_COMPONENTS, CONTROLLERS } from '../../configs/deviceMappings';
+import { CANVAS_COMPONENTS, CONTROLLERS, ID_MAPPINGS } from '../../configs/deviceMappings';
 
 const CanvasItem = ({ item }) => {
   const dispatch = useDispatch();
-  const CanvasComponent = CANVAS_COMPONENTS[item.id];
-  const ComponentController = CONTROLLERS[item.id];
+  const CanvasComponent = CANVAS_COMPONENTS[ID_MAPPINGS[item.id]];
+  const ComponentController = CONTROLLERS[ID_MAPPINGS[item.id]];
 
   if (!CanvasComponent) return <div>Component not found</div>;
 

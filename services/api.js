@@ -1,7 +1,8 @@
 const API_BASE_URL = 'http://localhost:8000/api';
 
 export const presetAPI = {
-  // Get all presets
+  
+  // Load all presets
   getAllPresets: async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/presets`);
@@ -17,7 +18,7 @@ export const presetAPI = {
   },
 
   // Save a new preset
-  save: async (presetData) => {
+  savePreset: async (presetData) => {
     try {
       const response = await fetch(`${API_BASE_URL}/presets`, {
         method: 'POST',
@@ -29,8 +30,7 @@ export const presetAPI = {
         body: JSON.stringify(presetData),
       });
 
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -46,7 +46,7 @@ export const presetAPI = {
   },
 
   // Load a specific preset
-  load: async (id) => {
+  getPreset: async (id) => {
     try {
       const response = await fetch(`${API_BASE_URL}/presets/${id}/load`, {
         method: 'POST',
