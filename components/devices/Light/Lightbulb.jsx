@@ -70,20 +70,20 @@ const Lightbulb = ({
       </g>
       <defs>
         <filter id="filter0_f_0_1" x="0" y="0" width="640" height="640" filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB">
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="64" result="effect1_foregroundBlur_0_1" />
         </filter>
         <filter id="filter1_f_0_1" x="176" y="170" width="288" height="336"
-          filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="24" result="effect1_foregroundBlur_0_1" />
         </filter>
-        <filter id="filter2_di_0_1" x="196" y="198" width="248" height="280" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <filter id="filter2_di_0_1" x="196" y="198" width="248" height="280" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
           {isOn ? (<>
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feColorMatrix in="SourceAlpha" type="matrix"
               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
             <feOffset />
@@ -104,7 +104,7 @@ const Lightbulb = ({
           </>)
             :
             (<>
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
               <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
               <feOffset />
@@ -116,14 +116,14 @@ const Lightbulb = ({
           }
         </filter>
         <filter id="filter3_f_0_1" x="272" y="274" width="80" height="96"
-          filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="8" result="effect1_foregroundBlur_0_1" />
         </filter>
         <filter id="filter4_d_0_1" x="308" y="296" width="24" height="84"
-          filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix in="SourceAlpha" type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
           <feOffset />
@@ -136,32 +136,32 @@ const Lightbulb = ({
         </filter>
         <linearGradient id="paint0_linear_0_1" x1="320" y1="222" x2="320" y2="234"
           gradientUnits="userSpaceOnUse">
-          <stop stop-color="#4A5565" />
-          <stop offset="1" stop-color="#364153" />
+          <stop stopColor="#4A5565" />
+          <stop offset="1" stopColor="#364153" />
         </linearGradient>
         <radialGradient id="paint1_radial_0_1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
           gradientTransform="translate(294.4 306) rotate(-90) scale(143.43 143.43)">
-          <stop stop-color={color} />
-          <stop offset="0.5" stop-color={color} stop-opacity="0.867" />
-          <stop offset="1" stop-color={color} stop-opacity="0.6" />
+          <stop stopColor={color} />
+          <stop offset="0.5" stopColor={color} stopOpacity="0.867" />
+          <stop offset="1" stopColor={color} stopOpacity="0.6" />
         </radialGradient>
         <radialGradient id="paint1_off_radial_0_1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
           gradientTransform="translate(294.4 306) rotate(-90) scale(143.43 143.43)">
-          <stop stop-color="#4A5568" />
-          <stop offset="0.5" stop-color="#2D3748" />
-          <stop offset="1" stop-color="#1A202C" />
+          <stop stopColor="#4A5568" />
+          <stop offset="0.5" stopColor="#2D3748" />
+          <stop offset="1" stopColor="#1A202C" />
         </radialGradient>
 
 
         <linearGradient id="paint2_linear_0_1" x1="288" y1="290" x2="349.44" y2="336.08"
           gradientUnits="userSpaceOnUse">
-          <stop stop-color="white" stop-opacity="0.8" />
-          <stop offset="1" stop-opacity="0" />
+          <stop stopColor="white" stopOpacity="0.8" />
+          <stop offset="1" stopOpacity="0" />
         </linearGradient>
         <linearGradient id="paint3_linear_0_1" x1="320" y1="306" x2="320" y2="370"
           gradientUnits="userSpaceOnUse">
-          <stop stop-color={color} />
-          <stop offset="1" stop-color="white" />
+          <stop stopColor={color} />
+          <stop offset="1" stopColor="white" />
         </linearGradient>
       </defs>
     </svg >

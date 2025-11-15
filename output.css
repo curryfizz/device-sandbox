@@ -590,16 +590,8 @@ html {
   left: 50%;
 }
 
-.left-6 {
-  left: 1.5rem;
-}
-
 .left-\[-10px\] {
   left: -10px;
-}
-
-.left-\[-8px\] {
-  left: -8px;
 }
 
 .top-1\/2 {
@@ -608,10 +600,6 @@ html {
 
 .top-3 {
   top: 0.75rem;
-}
-
-.top-6 {
-  top: 1.5rem;
 }
 
 .z-10 {
@@ -644,10 +632,6 @@ html {
 
 .flex {
   display: flex;
-}
-
-.h-0 {
-  height: 0px;
 }
 
 .h-4 {
@@ -712,10 +696,6 @@ html {
 
 .min-h-\[56px\] {
   min-height: 56px;
-}
-
-.w-0 {
-  width: 0px;
 }
 
 .w-10 {
@@ -878,10 +858,6 @@ html {
   overflow: hidden;
 }
 
-.overflow-visible {
-  overflow: visible;
-}
-
 .overflow-y-auto {
   overflow-y: auto;
 }
@@ -906,10 +882,6 @@ html {
   border-radius: 9999px;
 }
 
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-
 .rounded-topButtonRadius {
   border-radius: 8px;
 }
@@ -922,24 +894,12 @@ html {
   border-width: 2px;
 }
 
-.border-b-\[8px\] {
-  border-bottom-width: 8px;
-}
-
 .border-r {
   border-right-width: 1px;
 }
 
-.border-r-\[8px\] {
-  border-right-width: 8px;
-}
-
 .border-t {
   border-top-width: 1px;
-}
-
-.border-t-\[8px\] {
-  border-top-width: 8px;
 }
 
 .border-border {
@@ -960,19 +920,6 @@ html {
 .border-savePresetColor {
   --tw-border-opacity: 1;
   border-color: rgb(43 127 255 / var(--tw-border-opacity, 1));
-}
-
-.border-b-transparent {
-  border-bottom-color: transparent;
-}
-
-.border-r-blue-500 {
-  --tw-border-opacity: 1;
-  border-right-color: rgb(59 130 246 / var(--tw-border-opacity, 1));
-}
-
-.border-t-transparent {
-  border-top-color: transparent;
 }
 
 .bg-black\/30 {
@@ -1073,24 +1020,19 @@ html {
   padding-right: 1rem;
 }
 
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
 
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .text-base {

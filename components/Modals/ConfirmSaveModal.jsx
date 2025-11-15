@@ -22,7 +22,7 @@ const ConfirmSaveModal = ({ isOpen }) => {
 
         try {
             if (!canvasItem) {
-                throw err;
+                throw new Error("Could not store preset");
             }
             const payload = {
                 name: presetName,
@@ -34,6 +34,9 @@ const ConfirmSaveModal = ({ isOpen }) => {
             };
 
             const result = await dispatch(savePreset(payload));
+            if(result.error){
+                throw new Error("Could not save preset due to backend");
+            }
             dispatch(closeSaveModal());
             dispatch(showToast({ message: 'Preset saved!', type: 'success' }));
 
