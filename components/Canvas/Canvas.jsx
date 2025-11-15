@@ -12,19 +12,21 @@ import ConfirmSaveModal from '../Modals/ConfirmSaveModal';
 import { useDispatch, useSelector } from "react-redux";
 import {
   dropDevice,
-  removeCanvasItem,
   clearCanvas,
 } from "../../store/devicesSlice";
 import { openSaveModal, closeSaveModal, openClearModal, closeClearModal } from "../../store/uiSlice";
+import Toast from '../Toasts/Toast';
+import { hideToast } from '../../store/toastSlice';
 
 const Canvas = () => {
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
   const canvasItemRef = useRef(null);
 
-  
+
   const canvasItem = useSelector(state => state.devices.canvasItem);
   const draggedItem = useSelector(state => state.devices.draggedItem);
+  const toast = useSelector(state => state.toast);
   const isClearModalOpen = useSelector(state => state.ui.clearModalOpen);
   const isSaveModalOpen = useSelector(state => state.ui.saveModalOpen);
 
@@ -33,13 +35,13 @@ const Canvas = () => {
   const handleDrop = (e) => {
     e.preventDefault();
     if (!canvasRef.current || !draggedItem) return;
-    
-    const canvasRect = canvasRef.current.getBoundingClientRect();  
+
+    const canvasRect = canvasRef.current.getBoundingClientRect();
     const rect = {
       width: canvasRect.width,
       height: canvasRect.height
     }
-    dispatch(dropDevice({ canvasRect:rect }));
+    dispatch(dropDevice({ canvasRect: rect }));
   };
 
   const handleClear = () => {
@@ -85,6 +87,15 @@ const Canvas = () => {
             item={canvasItem}
           />
         )}
+
+        {toast.visible && (
+          <Toast
+            message={toast.message}
+            type={toast.type}
+            onClose={() => dispatch(hideToast())}
+            className="absolute top-3 left-1/2 -translate-x-1/2"
+          />
+        )}
       </div>
 
       {/* Modals */}
@@ -100,6 +111,9 @@ const Canvas = () => {
         onSavePreset={handleSavePreset}
         itemRef={canvasItemRef}
       />
+
+
+
     </div>
   );
 };

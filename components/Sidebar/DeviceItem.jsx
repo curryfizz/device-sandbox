@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  startDraggingDevice,
-} from '../../store/devicesSlice';
+import { startDraggingDevice } from '../../store/devicesSlice';
 import { DEVICE_COMPONENTS } from '../../configs/deviceMappings';
 
 const DeviceItem = ({ device }) => {
   const dispatch = useDispatch();
-
   const [isHovered, setIsHovered] = useState(false);
 
   const selectedId = useSelector(state => state.devices.selectedId);
   const isSelected = selectedId === device.id;
 
-  const DeviceComponent = DEVICE_COMPONENTS[device.id];
+  const DeviceComponent = device.id ? DEVICE_COMPONENTS[device.id] : null;
 
   const handleDragStart = (e) => {
-    dispatch(startDraggingDevice(device));     
+    dispatch(startDraggingDevice(device));
     e.dataTransfer.effectAllowed = 'copy';
   };
 
@@ -28,18 +25,24 @@ const DeviceItem = ({ device }) => {
       )}
 
       <div
-        draggable
+        draggable={!!device.id} // only draggable if it has an id
         onDragStart={handleDragStart}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={`
-          flex items-center gap-3 p-3 border rounded-buttonRadius cursor-grab transition-colors duration-200
+          flex items-center gap-3 p-3 border rounded-buttonRadius
+          cursor-${device.id ? 'grab' : 'default'} transition-colors duration-200
           ${isSelected ? 'bg-buttonHover border-buttonBorder' : 'bg-buttonColor border-buttonBorder'}
-          hover:bg-buttonHover active:cursor-grabbing
+          ${device.id ? 'hover:bg-buttonHover active:cursor-grabbing' : ''}
         `}
       >
-        <DeviceComponent hovered={isHovered} selected={isSelected} />
-        <span className="text-base text-text font-normal">{device.name}</span>
+        {DeviceComponent && (
+          <DeviceComponent hovered={isHovered} selected={isSelected} />
+        )}
+
+        <span className="text-base text-text font-normal">
+          {device.name || 'Unnamed Device'}
+        </span>
       </div>
     </div>
   );

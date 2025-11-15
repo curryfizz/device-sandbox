@@ -3,17 +3,20 @@ import { presetAPI } from "../services/api";
 
 export const loadPresets = createAsyncThunk(
   "presets/loadPresets",
-  async () => await presetAPI.getPresets()
+  async () => {
+    const result = await presetAPI.getAllPresets();
+    return result.data;
+  }
 );
 
 export const savePreset = createAsyncThunk(
   "presets/savePreset",
-  async (payload) => await presetAPI.savePreset(payload)
+  async (payload) => await presetAPI.save(payload)
 );
 
 export const loadPreset = createAsyncThunk(
   "presets/loadPreset",
-  async (id) => await presetAPI.getPreset(id)
+  async (id) => await presetAPI.load(id)
 );
 
 const presetsSlice = createSlice({

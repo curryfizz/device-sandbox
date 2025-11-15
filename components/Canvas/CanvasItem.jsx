@@ -8,7 +8,6 @@ import { CANVAS_COMPONENTS, CONTROLLERS } from '../../configs/deviceMappings';
 
 const CanvasItem = ({ item }) => {
   const dispatch = useDispatch();
-
   const CanvasComponent = CANVAS_COMPONENTS[item.id];
   const ComponentController = CONTROLLERS[item.id];
 
@@ -19,7 +18,7 @@ const CanvasItem = ({ item }) => {
   };
 
   const handleControllerUpdate = (newProps) => {
-    dispatch(updateDevice(newProps)); // no "updates" wrapper
+    dispatch(updateDevice(newProps));
   };
 
 
@@ -39,7 +38,8 @@ const CanvasItem = ({ item }) => {
           className="cursor-move hover:scale-105 transition-transform duration-100 group inline-block"
         >
           <CanvasComponent
-            {...item.props}  // item now always comes from Redux
+            size={item.size}      // explicit prop
+            {...item.props}       // spread the rest of the props
           />
         </div>
       </div>
