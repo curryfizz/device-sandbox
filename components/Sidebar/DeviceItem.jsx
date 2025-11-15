@@ -11,7 +11,7 @@ const DeviceItem = ({ device, className }) => {
 
   const canvasItem = useSelector(state => state.devices.canvasItem);
 
-  const isSelected = canvasItem && device && canvasItem.name === device.name;
+  const isSelected = canvasItem && device && canvasItem.name === device.name && canvasItem.id === device.id;
 
   const handleDragStart = (e) => {
     dispatch(startDraggingDevice(device));

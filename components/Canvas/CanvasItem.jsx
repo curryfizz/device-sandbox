@@ -10,7 +10,6 @@ const CanvasItem = ({ item }) => {
 
   const CanvasComponent = CANVAS_COMPONENTS[item.type];
   const ComponentController = CONTROLLERS[item.type];
-
   if (!CanvasComponent) return <div>Component not found</div>;
 
   const handleDragStart = () => {
