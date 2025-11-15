@@ -1,6 +1,6 @@
 import React from 'react';
 import DeviceItem from './DeviceItem';
-import { DEVICES } from '../../utils/constants';
+import { DEVICES } from '../../configs/devices';
 
 const DeviceList = ({ onDragStart, selectedId, setSelectedId }) => {
   return (

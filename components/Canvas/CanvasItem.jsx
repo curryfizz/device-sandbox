@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import LightController from "../devices/Light/LightController";
 
 const CanvasItem = ({ item, onDragStart }) => {
   const CanvasComponent = item.canvasComponent || item.component;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PresetItem from './PresetItem';
-import { PRESETS_EMPTY_MESSAGE } from '../../utils/constants';
+import { PRESETS_EMPTY_MESSAGE } from '../../configs/devices';
 
 const SavedPresets = ({ presets, canSave, onSave, onLoad, onDelete }) => {
   return (
