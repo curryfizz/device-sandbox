@@ -2,7 +2,8 @@ export const DEVICES = [
   {
     id: 1,
     name: "Light",
-    props: {
+    type: "Light",
+    settings: {
       size: 800,
       isOn: false,
       brightness: 0,
@@ -12,7 +13,8 @@ export const DEVICES = [
   {
     id: 2,
     name: "Fan",
-    props: {
+    type: "Fan",
+    settings: {
       size: 400,
       isOn: false,
       speed: 1,

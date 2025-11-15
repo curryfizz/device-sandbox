@@ -1,19 +1,17 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startDraggingDevice } from '../../store/devicesSlice';
-import { DEVICE_COMPONENTS, ID_MAPPINGS } from '../../configs/deviceMappings';
+import { DEVICE_COMPONENTS } from '../../configs/deviceMappings';
 
 const DeviceItem = ({ device, className }) => {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
-
-  const DeviceComponent = device.id ? DEVICE_COMPONENTS[ID_MAPPINGS[device.id]] : null;
+  console.log(device)
+  const DeviceComponent = device.id ? DEVICE_COMPONENTS[device.type] : null;
 
   const canvasItem = useSelector(state => state.devices.canvasItem);
 
-  const isSelected =
-    canvasItem && device &&
-    canvasItem.name === device.name;
+  const isSelected = canvasItem && device && canvasItem.type === device.type && canvasItem.name === device.name;
 
   const handleDragStart = (e) => {
     dispatch(startDraggingDevice(device));
@@ -48,7 +46,7 @@ const DeviceItem = ({ device, className }) => {
         )}
 
         <span className={`text-base text-text font-normal ${className}`}>
-          {device.name || 'Unnamed Device'}
+          {device.name || device.type || 'Unnamed Device'}
         </span>
       </div>
     </div>

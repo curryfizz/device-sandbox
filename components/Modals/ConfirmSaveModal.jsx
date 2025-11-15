@@ -28,8 +28,7 @@ const ConfirmSaveModal = ({ isOpen }) => {
                 name: presetName,
                 devices: [
                     {
-                        ...canvasItem.props,
-                        id: canvasItem.id
+                        ...canvasItem
                     },
                 ],
             };

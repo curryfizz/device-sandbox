@@ -12,7 +12,7 @@ const SavedPresets = () => {
     dispatch(loadPresets());
   }, [dispatch]);
 
-
+  console.log(presets)
   return (
     <div>
       <h3 className="text-base mb-4 text-text font-normal">Saved Presets</h3>
@@ -24,9 +24,10 @@ const SavedPresets = () => {
             >
               <DeviceItem
                 device={{
-                  id: preset.devices?.[0]?.id || preset.id,
+                  id: preset.id,
+                  type: preset.devices?.[0].type,
                   name: preset.name,
-                  props: preset.devices?.[0] || {},
+                  settings: preset.devices?.[0].settings || {},
                 }}
               />
             </div>
@@ -36,7 +37,7 @@ const SavedPresets = () => {
             device={{
               id: null,
               name: PRESETS_EMPTY_MESSAGE,
-              props: {},
+              settings: {},
             }}
             className="bg-transparent border-buttonBorder text-textSecondary text-opacity-30 cursor-not-allowed"
           />

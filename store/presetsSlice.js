@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { presetAPI } from "../services/api";
+import { presetAPI } from "../services/presetsApi";
 
 export const loadPresets = createAsyncThunk(
   "presets/loadPresets",

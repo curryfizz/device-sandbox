@@ -1,8 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { deviceAPI } from "../services/devicesApi";
+
+// Async thunk to fetch devices from the backend
+export const fetchDevices = createAsyncThunk(
+  "devices/fetchDevices",
+  async () => {
+    const response = await deviceAPI.getAllDevices(); // GET /api/devices
+    return response.data;
+  }
+);
 
 const initialState = {
-  canvasItem: null,
-  draggedItem: null,
+  list: [],          // all devices fetched from DB
+  canvasItem: null,  // currently on-canvas item
+  draggedItem: null, // currently dragging item
 };
 
 const devicesSlice = createSlice({
@@ -16,27 +27,37 @@ const devicesSlice = createSlice({
       const { canvasRect } = action.payload;
       const dragged = state.draggedItem;
       if (!dragged) return;
-
-      const size = dragged?.props?.size || 200;
+    
+      const size = dragged?.settings?.size || 200;
       const x = canvasRect.width / 2 - size / 2;
       const y = canvasRect.height / 2 - size / 2;
 
       state.canvasItem = { ...dragged, x, y, id: dragged.id || Date.now() };
       state.draggedItem = null;
     },
-
     clearCanvas: (state) => {
       state.canvasItem = null;
     },
-
     updateDevice: (state, action) => {
       if (state.canvasItem) {
-        state.canvasItem.props = {
-          ...state.canvasItem.props,
+        state.canvasItem.settings = {
+          ...state.canvasItem.settings,
           ...action.payload,
         };
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchDevices.fulfilled, (state, action) => {
+      state.list = action.payload;
+
+      // dynamically create ID -> name mapping
+      console.log(action.payload)
+      state.idMappings = action.payload.reduce((acc, device) => {
+        acc[device.id] = device.name;
+        return acc;
+      }, {});
+    });
   },
 });
 
@@ -44,7 +65,7 @@ export const {
   startDraggingDevice,
   dropDevice,
   clearCanvas,
-  updateDevice, // export it
+  updateDevice,
 } = devicesSlice.actions;
 
 export default devicesSlice.reducer;

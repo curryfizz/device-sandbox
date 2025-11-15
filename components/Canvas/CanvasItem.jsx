@@ -3,12 +3,13 @@ import {
   updateDevice,
   startDraggingDevice,
 } from "../../store/devicesSlice";
-import { CANVAS_COMPONENTS, CONTROLLERS, ID_MAPPINGS } from '../../configs/deviceMappings';
+import { CANVAS_COMPONENTS, CONTROLLERS } from '../../configs/deviceMappings';
 
 const CanvasItem = ({ item }) => {
   const dispatch = useDispatch();
-  const CanvasComponent = CANVAS_COMPONENTS[ID_MAPPINGS[item.id]];
-  const ComponentController = CONTROLLERS[ID_MAPPINGS[item.id]];
+
+  const CanvasComponent = CANVAS_COMPONENTS[item.type];
+  const ComponentController = CONTROLLERS[item.type];
 
   if (!CanvasComponent) return <div>Component not found</div>;
 
@@ -16,10 +17,9 @@ const CanvasItem = ({ item }) => {
     dispatch(startDraggingDevice(item));
   };
 
-  const handleControllerUpdate = (newProps) => {
-    dispatch(updateDevice(newProps));
+  const handleControllerUpdate = (newSettings) => {
+    dispatch(updateDevice(newSettings));
   };
-
 
   return (
     <>
@@ -37,8 +37,7 @@ const CanvasItem = ({ item }) => {
           className="cursor-move hover:scale-105 transition-transform duration-100 group inline-block"
         >
           <CanvasComponent
-            size={item.size}      // explicit prop
-            {...item.props}       // spread the rest of the props
+            {...item.settings}       // spread the rest of the settings
           />
         </div>
       </div>
@@ -47,7 +46,7 @@ const CanvasItem = ({ item }) => {
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-50">
         <ComponentController
           controls={{
-            props: item.props,
+            props: item.settings ?? {},
             onUpdateItem: handleControllerUpdate,
           }}
         />

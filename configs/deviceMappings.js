@@ -6,21 +6,21 @@ import Lightbulb from "../components/devices/Light/Lightbulb";
 import LightController from "../components/devices/Light/LightController";
 
 export const ID_MAPPINGS = {
-  1 : 'light',
-  2 : 'fan'
+  1 : 'Light',
+  2 : 'Fan'
 }
 
 export const CANVAS_COMPONENTS = {
-  fan: FanWithRotation,
-  light: Lightbulb,
+  'Fan': FanWithRotation,
+  'Light': Lightbulb,
 };
 
 export const DEVICE_COMPONENTS = {
-  fan: Fan,
-  light: Light,
+  'Fan': Fan,
+  'Light': Light,
 };
 
 export const CONTROLLERS = {
-  fan: FanController,
-  light: LightController,
+  'Fan': FanController,
+  'Light': LightController,
 };
