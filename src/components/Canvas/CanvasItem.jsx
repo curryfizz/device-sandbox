@@ -12,44 +12,33 @@ const CanvasItem = ({ item }) => {
   const ComponentController = CONTROLLERS[item.type];
   if (!CanvasComponent) return <div>Component not found</div>;
 
-  const handleDragStart = () => {
-    dispatch(startDraggingDevice(item));
-  };
 
   const handleControllerUpdate = (newSettings) => {
     dispatch(updateDevice(newSettings));
   };
 
+  const dpr = window.devicePixelRatio || 1;
+  const scale = Math.min(1, Math.max(0.85, 1 / dpr));
+  const size = item.settings.size * scale;
+
+
   return (
     <>
       {/* Device */}
       <div
-        style={{
-          position: "absolute",
-          left: item.x,
-          top: item.y,
-        }}
-      >
-        <div
-          draggable
-          onDragStart={handleDragStart}
-          className="cursor-move hover:scale-105 transition-transform duration-100 group inline-block"
-        >
-          <CanvasComponent
-            {...item.settings}       // spread the rest of the settings
-          />
-        </div>
-      </div>
+        className={`hover:scale-105 transition-transform duration-100 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 `}      >
+        <CanvasComponent {...item.settings} size={size} />
+      </div >
 
       {/* Controller */}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-50">
+      < div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-50" >
         <ComponentController
           controls={{
             props: item.settings ?? {},
             onUpdateItem: handleControllerUpdate,
           }}
         />
-      </div>
+      </div >
     </>
   );
 };
