@@ -1,53 +1,76 @@
-# Device Sandbox Frontend
+# Device Sandbox Backend
 
-This is the frontend for **Device Sandbox**, powered by React, Redux, and Tailwind CSS.
+## Overview
 
+This is a **minimal Laravel backend API** for managing **devices** and **presets**.  
+It provides endpoints to:
 
-## Prerequisites
+-   Fetch all devices
+-   Fetch all presets
+-   Create a new preset
+-   Fetch a single preset
 
-- Node.js >= 18
-- npm or yarn
-- Backend API running (see `VITE_API_BASE_URL`) - **please run device-sandbox-api first**
+The backend is designed to serve a frontend or client application that controls devices and applies preset configurations.
 
+---
 
-## Setup
+## API Endpoints
 
-1. Clone the repository (unzip the files in this case)
+### Test
+
+| Method | Endpoint | Description      |
+| ------ | -------- | ---------------- |
+| GET    | `/test`  | API health check |
+
+### Devices
+
+| Method | Endpoint   | Description       |
+| ------ | ---------- | ----------------- |
+| GET    | `/devices` | Fetch all devices |
+
+### Presets
+
+| Method | Endpoint        | Description           |
+| ------ | --------------- | --------------------- |
+| GET    | `/presets`      | Fetch all presets     |
+| POST   | `/presets`      | Create a new preset   |
+| GET    | `/presets/{id}` | Fetch a single preset |
+
+---
+
+## Installation
+
+1.  Clone the repository:
+
     ```bash
-    git clone https://github.com/curryfizz/device-sandbox.git
-    cd device-sandbox
+    git clone https://github.com/your-username/device-sandbox-api.git
+    cd device-sandbox-api
     ```
-2. Install dependencies
+
+2.  Install PHP dependencies:
     ```bash
-    npm install
-    # or
-    yarn install
+    composer install
     ```
-3. Configure environment variables
-
-   Create a ``.env`` file in the root: 
-   ```env
-   VITE_API_BASE_URL=http://localhost:8000/api
-   ```
-    Replace with your backend URL if different.
-4. Start the development server
+3. Configure environment variables:
     ```bash
-    npm run dev
-    # or
-    yarn dev
+    APP_NAME=DeviceSandbox
+    APP_ENV=production
+    APP_KEY=base64:GENERATED_KEY
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=device_sandbox
+    DB_USERNAME=root
+    DB_PASSWORD=
     ```
-Open http://localhost:5173 in your browser.
 
+4. Run database migrations
+    ```bash
+    php artisan migrate
+    ```
+5. Start the server
+    ```bash
+    php artisan serve
+    ```
 
-## Folder Structure
-```
-src/
-├─ components/      # UI components (Canvas, Devices, Buttons, Modals, Toast, etc.)
-├─ configs/         # Device mappings, constants
-├─ store/           # Redux slices and store
-├─ services/        # API calls
-├─ App.jsx          # Calls <MainLayout />
-└─ main.jsx         # Main app entry
-```
-## Additional
-- Canvas items automatically scales devices based on window.devicePixelRatio.
+API runs at: http://127.0.0.1:8000
