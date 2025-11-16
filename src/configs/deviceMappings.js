@@ -1,9 +1,9 @@
-import Fan from "../components/devices/Fan/Fan";
-import FanController from "../components/devices/Fan/FanController";
-import FanWithRotation from "../components/devices/Fan/FanWithRotation";
-import Light from "../components/devices/Light/Light";
-import Lightbulb from "../components/devices/Light/Lightbulb";
-import LightController from "../components/devices/Light/LightController";
+import Fan from "../components/Devices/Fan/Fan";
+import FanController from "../components/Devices/Fan/FanController";
+import FanWithRotation from "../components/Devices/Fan/FanWithRotation";
+import Light from "../components/Devices/Light/Light";
+import Lightbulb from "../components/Devices/Light/Lightbulb";
+import LightController from "../components/Devices/Light/LightController";
 
 export const ID_MAPPINGS = {
   1 : 'Light',

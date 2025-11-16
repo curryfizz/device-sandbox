@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import CanvasItem from './CanvasItem';
 import { CANVAS_EMPTY_MESSAGE } from '../../configs/devicesProps';
 
@@ -17,6 +17,7 @@ import {
 import { openSaveModal, closeSaveModal, openClearModal, closeClearModal } from "../../store/uiSlice";
 import Toast from '../Toasts/Toast';
 import { hideToast } from '../../store/toastSlice';
+import DragIndicator from './DragIndicator';
 
 const Canvas = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const Canvas = () => {
   const isSaveModalOpen = useSelector(state => state.ui.saveModalOpen);
 
   const handleDragOver = (e) => e.preventDefault();
+  const [showDragIndicator, setShowDragIndicator] = useState(false);
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -49,12 +51,29 @@ const Canvas = () => {
     dispatch(closeClearModal());
   };
 
-  const handleSavePreset = (presetName) => {
+  const handleSavePreset = () => {
     dispatch(closeSaveModal());
   };
 
+  const handleShowDragIndicatorOnHover = () => {
+    if (!canvasItem) {
+      setShowDragIndicator(true);
+      setTimeout(() => setShowDragIndicator(false), 3000);
+    } else {
+      setShowDragIndicator(false)
+    }
+  }
+
   return (
-    <div className="flex-1 flex flex-col p-6 gap-4">
+    <div
+      className="flex-1 flex flex-col p-6 gap-4"
+      onMouseMove={handleShowDragIndicatorOnHover}
+    >
+      {
+        showDragIndicator && (
+          <DragIndicator />
+        )
+      }
       {/* Header */}
       <div className="flex justify-between items-center mb-1 min-h-[38px]">
         <h1 className="text-base font-normal text-text">Testing Canvas</h1>
