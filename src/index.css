@@ -12,11 +12,10 @@
 
 @layer base {
   html {
-    font-family: 'Inter', sans-serif;
+    font-family: theme('fontFamily.sans');
   }
-
-
 }
+
 
 body {
   margin: 0;
