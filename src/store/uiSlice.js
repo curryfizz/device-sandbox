@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  saveModalOpen: false,
-  clearModalOpen: false,
+  saveModalOpen: false, // is Save Modal open
+  clearModalOpen: false, // is Clear Modal open
 };
 
 const uiSlice = createSlice({
@@ -17,6 +17,7 @@ const uiSlice = createSlice({
       state.saveModalOpen = false;
     },
 
+    // Clear Modal
     openClearModal: (state) => {
       state.clearModalOpen = true;
     },

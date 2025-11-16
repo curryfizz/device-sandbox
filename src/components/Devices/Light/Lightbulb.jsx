@@ -5,10 +5,14 @@ const Lightbulb = ({
   color = '#FFE5B4',
 }) => {
 
+  // Scaling the SVG to support different sizes dynamically
   const scale = size / 640;
   const scaledSize = 640 * scale;
+
+  // Glow opacity calculations based on brightness
   const glowOpacity = 0.3 * brightness / 100;
   const innerGlowOpacity = 0.6 * brightness / 100;
+
 
   return (
     <svg
@@ -18,7 +22,7 @@ const Lightbulb = ({
       fill="none"
     >
       <g transform={`scale(${scale})`}>
-
+        {/* Outer glow effect, only visible when the bulb is on */}
         <g opacity={isOn ? glowOpacity : 0} filter="url(#filter0_f_0_1)">
           <path
             d="M128 320C128 213.961 213.961 128 320 128C426.039 128 512 213.961 512 320C512 426.039 426.039 512 320 512C213.961 512 128 426.039 128 320Z"
@@ -50,21 +54,29 @@ const Lightbulb = ({
         </mask>
         <path d="M280 246H360V250H280V246Z" fill="#364153" />
         <path d="M360 250V249H280V250V251H360V250Z" fill="#4A5565" mask="url(#path-9-inside-4_0_1)" />
+
+        {/* Inner glow, adds depth when the bulb is on */}
         <g opacity={isOn ? innerGlowOpacity : 0} filter="url(#filter1_f_0_1)">
           <path
             d="M224 314C224 260.981 266.981 218 320 218C373.019 218 416 260.981 416 314V362C416 415.019 373.019 458 320 458C266.981 458 224 415.019 224 362V314Z"
             fill={color} />
         </g>
+
+        {/* Core of the bulb */}
         <g filter="url(#filter2_di_0_1)">
           <path
             d="M256 322C256 286.654 284.654 258 320 258C355.346 258 384 286.654 384 322V354C384 389.346 355.346 418 320 418C284.654 418 256 389.346 256 354V322Z"
             fill={isOn ? "url(#paint1_radial_0_1)" : "url(#paint1_off_radial_0_1)"}
           />
+
+          {/* Highlight for visual depth */}
           <g opacity="0.4" filter={"url(#filter3_f_0_1)"}>
             <path
               d="M288 314C288 300.745 298.745 290 312 290C325.255 290 336 300.745 336 314V330C336 343.255 325.255 354 312 354C298.745 354 288 343.255 288 330V314Z"
               fill="url(#paint2_linear_0_1)" />
           </g>
+
+          {/* Filament glow only when on */}
           <g filter="url(#filter4_d_0_1)">
             {isOn &&
               <path
@@ -73,6 +85,8 @@ const Lightbulb = ({
             }
           </g>
         </g>
+
+        {/* SVG filters and gradients */}
         <defs>
           <filter id="filter0_f_0_1" x="0" y="0" width="640" height="640" filterUnits="userSpaceOnUse"
             colorInterpolationFilters="sRGB">

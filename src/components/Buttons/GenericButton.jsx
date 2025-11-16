@@ -1,5 +1,4 @@
-import React from 'react';
-
+// Generic button that is used im several places, onClick = takes in handler, text=label, className = extra styles
 const GenericButton = ({ onClick, text='Cancel', className }) => {
   return (
     <button

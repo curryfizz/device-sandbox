@@ -8,6 +8,7 @@ const SavedPresets = () => {
   const dispatch = useDispatch();
   const presets = useSelector(state => state.presets.list);
 
+  // Load presets from backend/store on component mount
   useEffect(() => {
     dispatch(loadPresets());
   }, [dispatch]);
@@ -15,8 +16,10 @@ const SavedPresets = () => {
   return (
     <div>
       <h3 className="text-base mb-4 text-text font-normal">Saved Presets</h3>
+
       <div className="flex flex-col gap-3 max-h-[720px]">
         {presets?.length ? (
+          // Render each saved preset as a DeviceItem
           presets.map((preset) => (
             <DeviceItem
               key={preset.id}
@@ -27,9 +30,9 @@ const SavedPresets = () => {
                 settings: preset.devices?.[0].settings || {},
               }}
             />
-
           ))
         ) : (
+          // Show placeholder when no presets exist
           <DeviceItem
             device={{
               id: null,

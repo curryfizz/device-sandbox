@@ -1,3 +1,4 @@
+// Light icon svg
 const Light = ({ size = 20, hovered = false, selected = false, className = '' }) => {
   const strokeClass = hovered || selected
     ? 'text-white'

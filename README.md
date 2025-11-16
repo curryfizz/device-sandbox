@@ -1,16 +1,53 @@
-# React + Vite
+# Device Sandbox Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for **Device Sandbox**, powered by React, Redux, and Tailwind CSS.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Prerequisites
 
-## React Compiler
+- Node.js >= 18
+- npm or yarn
+- Backend API running (see `VITE_API_BASE_URL`) - **please run device-sandbox-api first**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clone the repository (unzip the files in this case)
+    ```bash
+    git clone https://github.com/curryfizz/device-sandbox.git
+    cd device-sandbox
+    ```
+2. Install dependencies
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+3. Configure environment variables
+
+   Create a ``.env`` file in the root: 
+   ```env
+   VITE_API_BASE_URL=http://localhost:8000/api
+   ```
+    Replace with your backend URL if different.
+4. Start the development server
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
+Open http://localhost:5173 in your browser.
+
+
+## Folder Structure
+```
+src/
+├─ components/      # UI components (Canvas, Devices, Buttons, Modals, Toast, etc.)
+├─ configs/         # Device mappings, constants
+├─ store/           # Redux slices and store
+├─ services/        # API calls
+├─ App.jsx          # Calls <MainLayout />
+└─ main.jsx         # Main app entry
+```
+## Additional
+- Canvas items automatically scales devices based on window.devicePixelRatio.

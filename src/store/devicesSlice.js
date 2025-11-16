@@ -1,19 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { deviceAPI } from "../services/devicesApi";
 
-// Async thunk to fetch devices from the backend
+// Fetch devices from backend
 export const fetchDevices = createAsyncThunk(
   "devices/fetchDevices",
   async () => {
-    const response = await deviceAPI.getAllDevices(); // GET /api/devices
-    return response.data; // assume an array of devices
+    const response = await deviceAPI.getAllDevices();
+    return response.data; // array of devices
   }
 );
 
 const initialState = {
-  list: [], // all devices fetched from DB
-  canvasItem: null, // currently on-canvas item
-  draggedItem: null, // currently dragging item
+  list: [], // all devices
+  canvasItem: null, // currently on-canvas
+  draggedItem: null, // being dragged
 };
 
 const devicesSlice = createSlice({
@@ -21,39 +21,34 @@ const devicesSlice = createSlice({
   initialState,
   reducers: {
     startDraggingDevice: (state, action) => {
-      state.draggedItem = action.payload;
+      state.draggedItem = action.payload; // start drag
     },
-
-    dropDevice: (state, action) => {
-      const dragged = state.draggedItem;
-      if (!dragged) return;
-
+    dropDevice: (state) => {
+      if (!state.draggedItem) return;
       state.canvasItem = {
-        ...dragged,
-        id: dragged.id || Date.now(),
+        ...state.draggedItem,
+        id: state.draggedItem.id || Date.now(),
       };
-      state.draggedItem = null;
+      state.draggedItem = null; // reset drag
     },
     clearCanvas: (state) => {
       state.canvasItem = null;
     },
     updateDevice: (state, action) => {
-      if (state.canvasItem) {
+      if (state.canvasItem)
         state.canvasItem.settings = {
           ...state.canvasItem.settings,
           ...action.payload,
         };
-      }
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchDevices.fulfilled, (state, action) => {
-      state.list = action.payload; // update the device list when fetch succeeds
+      state.list = action.payload; // set device list
     });
   },
 });
 
 export const { startDraggingDevice, dropDevice, clearCanvas, updateDevice } =
   devicesSlice.actions;
-
 export default devicesSlice.reducer;

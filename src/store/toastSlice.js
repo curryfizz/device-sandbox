@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   message: '',
   type: 'success', // success | error
-  visible: false,
+  visible: false,  // is toast visible
 };
 
 const toastSlice = createSlice({
@@ -12,12 +12,12 @@ const toastSlice = createSlice({
   reducers: {
     showToast: (state, action) => {
       const { message, type } = action.payload;
-      state.message = message;
-      state.type = type || 'success';
-      state.visible = true;
+      state.message = message;         // set message
+      state.type = type || 'success';  // set type
+      state.visible = true;            // show toast
     },
     hideToast: (state) => {
-      state.visible = false;
+      state.visible = false;           // hide toast
     },
   },
 });

@@ -1,19 +1,12 @@
 import { useRef, useState } from 'react';
 import CanvasItem from './CanvasItem';
 import { CANVAS_EMPTY_MESSAGE } from '../../configs/devicesProps';
-
-// Buttons & modals
 import GenericButton from '../Buttons/GenericButton';
 import SaveButton from '../Buttons/SaveButton';
 import ConfirmClearModal from '../Modals/ConfirmClearModal';
 import ConfirmSaveModal from '../Modals/ConfirmSaveModal';
-
-// Redux
 import { useDispatch, useSelector } from "react-redux";
-import {
-  dropDevice,
-  clearCanvas,
-} from "../../store/devicesSlice";
+import { dropDevice, clearCanvas } from "../../store/devicesSlice";
 import { openSaveModal, closeSaveModal, openClearModal, closeClearModal } from "../../store/uiSlice";
 import Toast from '../Toasts/Toast';
 import { hideToast } from '../../store/toastSlice';
@@ -21,9 +14,8 @@ import DragIndicator from './DragIndicator';
 
 const Canvas = () => {
   const dispatch = useDispatch();
-  const canvasRef = useRef(null);
-  const canvasItemRef = useRef(null);
-
+  const canvasRef = useRef(null);      // main canvas wrapper
+  const canvasItemRef = useRef(null);  // current item on canvas
 
   const canvasItem = useSelector(state => state.devices.canvasItem);
   const draggedItem = useSelector(state => state.devices.draggedItem);
@@ -31,53 +23,49 @@ const Canvas = () => {
   const isClearModalOpen = useSelector(state => state.ui.clearModalOpen);
   const isSaveModalOpen = useSelector(state => state.ui.saveModalOpen);
 
-  const handleDragOver = (e) => e.preventDefault();
   const [showDragIndicator, setShowDragIndicator] = useState(false);
 
+  const handleDragOver = (e) => e.preventDefault(); // allow dropping
+
+  // Drop dragged device onto canvas
   const handleDrop = (e) => {
     e.preventDefault();
     if (!canvasRef.current || !draggedItem) return;
-
     const canvasRect = canvasRef.current.getBoundingClientRect();
-    const rect = {
-      width: canvasRect.width,
-      height: canvasRect.height
-    }
-    dispatch(dropDevice({ canvasRect: rect }));
+    dispatch(dropDevice({ canvasRect: { width: canvasRect.width, height: canvasRect.height } }));
   };
 
+  // Clear canvas
   const handleClear = () => {
     dispatch(clearCanvas());
     dispatch(closeClearModal());
   };
 
+  // Save preset placeholder
   const handleSavePreset = () => {
     dispatch(closeSaveModal());
   };
 
+  // Show drag indicator when hovering empty canvas
   const handleShowDragIndicatorOnHover = () => {
     if (!canvasItem) {
       setShowDragIndicator(true);
-      setTimeout(() => setShowDragIndicator(false), 3000);
+      setTimeout(() => setShowDragIndicator(false), 3000); // auto-hide after 3s
     } else {
-      setShowDragIndicator(false)
+      setShowDragIndicator(false);
     }
   }
 
   return (
     <div
       className="flex-1 flex flex-col p-6 gap-4"
-      onMouseMove={handleShowDragIndicatorOnHover}
+      onMouseMove={handleShowDragIndicatorOnHover} // track hover
     >
-      {
-        showDragIndicator && (
-          <DragIndicator />
-        )
-      }
+      {showDragIndicator && <DragIndicator />}
+
       {/* Header */}
       <div className="flex justify-between items-center mb-1 min-h-[38px]">
         <h1 className="text-base font-normal text-text">Testing Canvas</h1>
-
         {canvasItem && (
           <div className="flex gap-1">
             <GenericButton text='Clear' onClick={() => dispatch(openClearModal())} />
@@ -100,12 +88,7 @@ const Canvas = () => {
           </div>
         )}
 
-        {canvasItem && (
-          <CanvasItem
-            ref={canvasItemRef}
-            item={canvasItem}
-          />
-        )}
+        {canvasItem && <CanvasItem ref={canvasItemRef} item={canvasItem} />}
 
         {toast.visible && (
           <Toast
@@ -130,9 +113,6 @@ const Canvas = () => {
         onSavePreset={handleSavePreset}
         itemRef={canvasItemRef}
       />
-
-
-
     </div>
   );
 };

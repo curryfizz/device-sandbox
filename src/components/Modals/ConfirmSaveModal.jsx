@@ -12,8 +12,10 @@ const ConfirmSaveModal = ({ isOpen }) => {
     const [presetName, setPresetName] = useState("");
     const [showErrorText, setShowErrorText] = useState(false);
 
+    // Don't render modal if closed
     if (!isOpen) return null;
 
+    // Handle saving the preset
     const handleSave = async () => {
         if (!presetName) {
             setShowErrorText(true);
@@ -21,54 +23,49 @@ const ConfirmSaveModal = ({ isOpen }) => {
         };
 
         try {
-            if (!canvasItem) {
-                throw new Error("Could not store preset");
-            }
+            if (!canvasItem) throw new Error("Could not store preset");
+
             const payload = {
                 name: presetName,
-                devices: [
-                    {
-                        ...canvasItem
-                    },
-                ],
+                devices: [{ ...canvasItem }],
             };
 
             const result = await dispatch(savePreset(payload));
-            if (result.error) {
-                throw new Error("Could not save preset due to backend");
-            }
+
+            if (result.error) throw new Error("Could not save preset due to backend");
+
             dispatch(closeSaveModal());
             dispatch(showToast({ message: 'Preset saved!', type: 'success' }));
-
 
         } catch (err) {
             console.error(err);
             dispatch(closeSaveModal());
             dispatch(showToast({ message: 'Failed to save preset', type: 'error' }));
         } finally {
-            setPresetName("");
-            setShowErrorText(false)
+            setPresetName("");       // reset input
+            setShowErrorText(false)  // hide error
         }
     };
 
+    // Cancel button handler
     const handleCancel = () => {
-        setPresetName("");               // reset input
+        setPresetName("");           
         setShowErrorText(false)
-        dispatch(closeSaveModal());      // close the modal
+        dispatch(closeSaveModal());  // close modal
     };
 
     return (
-
+        // Full-screen overlay centered modal
         <div className="absolute inset-0 flex items-center justify-center z-50 pointer-events-auto">
-            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 bg-black/30" /> {/* semi-transparent background */}
             <div className="relative border bg-modalBackgroundColor rounded-canvas border-buttonBorder min-w-[530px] z-10 gap-3 shadow-lg">
-                <div className="flex justify-between items-center p-6  h-[64px] text-textSecondary">
 
+                {/* Header with title and close button */}
+                <div className="flex justify-between items-center p-6  h-[64px] text-textSecondary">
                     <h2 className="text-lg font-bold">Give it a name</h2>
-                    <button
-                        onClick={handleCancel}
-                    >
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" >
+                    <button onClick={handleCancel}>
+                        {/* Close icon */}
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <g clip-path="url(#clip0_16_270)">
                                 <path d="M12.5 3.5L3.5 12.5" stroke="#E5E7EB" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M12.5 12.5L3.5 3.5" stroke="#E5E7EB" stroke-linecap="round" stroke-linejoin="round" />
@@ -81,7 +78,10 @@ const ConfirmSaveModal = ({ isOpen }) => {
                         </svg>
                     </button>
                 </div>
+
                 <hr className="border-t border-buttonBorder" />
+
+                {/* Input section */}
                 <div className="p-6 text-sm space-y-3 h-[124px]">
                     <input
                         type="text"
@@ -96,13 +96,16 @@ const ConfirmSaveModal = ({ isOpen }) => {
                         </p>
                     )}
                     <p className="p-b-2 text-sm font-normal text-iconColor">
-                        By adding this effect as a present you can reuse this anytime.
+                        By adding this effect as a preset you can reuse this anytime.
                     </p>
                 </div>
+
+                {/* Action buttons */}
                 <div className="flex justify-end gap-2 p-6 text-sm h-[86px]">
                     <GenericButton text="Cancel" onClick={handleCancel} className={"px-2"} />
                     <SaveButton onClick={handleSave} />
                 </div>
+
             </div>
         </div>
     );

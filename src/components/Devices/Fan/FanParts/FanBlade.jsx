@@ -1,3 +1,4 @@
+// Fan Blade svg
 const FanBlade = () => {
 
   return (

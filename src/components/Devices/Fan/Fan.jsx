@@ -1,4 +1,4 @@
-
+// Fan Icon svg
 const Fan = ({ size = 20, hovered = false, selected = false, className = '' }) => {
     const strokeClass = hovered || selected ? 'text-white'
         : 'text-iconColor';
