@@ -11,8 +11,8 @@ export const fetchDevices = createAsyncThunk(
 );
 
 const initialState = {
-  list: [],          // all devices fetched from DB
-  canvasItem: null,  // currently on-canvas item
+  list: [], // all devices fetched from DB
+  canvasItem: null, // currently on-canvas item
   draggedItem: null, // currently dragging item
 };
 
@@ -23,16 +23,15 @@ const devicesSlice = createSlice({
     startDraggingDevice: (state, action) => {
       state.draggedItem = action.payload;
     },
+
     dropDevice: (state, action) => {
-      const { canvasRect } = action.payload;
       const dragged = state.draggedItem;
       if (!dragged) return;
-    
-      const size = dragged?.settings?.size || 200;
-      const x = canvasRect.width / 2 - size / 2;
-      const y = canvasRect.height / 2 - size / 2;
 
-      state.canvasItem = { ...dragged, x, y, id: dragged.id || Date.now() };
+      state.canvasItem = {
+        ...dragged,
+        id: dragged.id || Date.now(),
+      };
       state.draggedItem = null;
     },
     clearCanvas: (state) => {
@@ -54,11 +53,7 @@ const devicesSlice = createSlice({
   },
 });
 
-export const {
-  startDraggingDevice,
-  dropDevice,
-  clearCanvas,
-  updateDevice,
-} = devicesSlice.actions;
+export const { startDraggingDevice, dropDevice, clearCanvas, updateDevice } =
+  devicesSlice.actions;
 
 export default devicesSlice.reducer;

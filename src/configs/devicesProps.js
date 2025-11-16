@@ -4,7 +4,7 @@ export const DEVICES = [
     name: "Light",
     type: "Light",
     settings: {
-      size: 800,
+      size: 640,
       isOn: false,
       brightness: 0,
       color: "#FFE5B4",
