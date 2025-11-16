@@ -3,7 +3,7 @@ import GenericButton from "../Buttons/GenericButton";
 import SaveButton from "../Buttons/SaveButton";
 import { closeSaveModal } from "../../store/uiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {showToast } from "../../store/toastSlice";
+import { showToast } from "../../store/toastSlice";
 import { savePreset } from "../../store/presetsSlice";
 
 const ConfirmSaveModal = ({ isOpen }) => {
@@ -34,7 +34,7 @@ const ConfirmSaveModal = ({ isOpen }) => {
             };
 
             const result = await dispatch(savePreset(payload));
-            if(result.error){
+            if (result.error) {
                 throw new Error("Could not save preset due to backend");
             }
             dispatch(closeSaveModal());
@@ -62,7 +62,25 @@ const ConfirmSaveModal = ({ isOpen }) => {
         <div className="absolute inset-0 flex items-center justify-center z-50 pointer-events-auto">
             <div className="absolute inset-0 bg-black/30" />
             <div className="relative border bg-modalBackgroundColor rounded-canvas border-buttonBorder min-w-[530px] z-10 gap-3 shadow-lg">
-                <h2 className="text-lg font-bold p-6 h-[64px]">Give it a name</h2>
+                <div className="flex justify-between items-center p-6  h-[64px] text-textSecondary">
+
+                    <h2 className="text-lg font-bold">Give it a name</h2>
+                    <button
+                        onClick={handleCancel}
+                    >
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" >
+                            <g clip-path="url(#clip0_16_270)">
+                                <path d="M12.5 3.5L3.5 12.5" stroke="#E5E7EB" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M12.5 12.5L3.5 3.5" stroke="#E5E7EB" stroke-linecap="round" stroke-linejoin="round" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_16_270">
+                                    <rect width="16" height="16" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </button>
+                </div>
                 <hr className="border-t border-buttonBorder" />
                 <div className="p-6 text-sm space-y-3 h-[124px]">
                     <input
@@ -82,7 +100,7 @@ const ConfirmSaveModal = ({ isOpen }) => {
                     </p>
                 </div>
                 <div className="flex justify-end gap-2 p-6 text-sm h-[86px]">
-                    <GenericButton text="Cancel" onClick={handleCancel} />
+                    <GenericButton text="Cancel" onClick={handleCancel} className={"px-2"} />
                     <SaveButton onClick={handleSave} />
                 </div>
             </div>
