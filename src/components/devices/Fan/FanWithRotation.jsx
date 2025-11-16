@@ -69,8 +69,8 @@ const FanWithRotation = ({ size = 640, isOn = false, speed = 1 }) => {
 
   return (
     <svg
-      width={size}
-      height={size}
+      width={scaledSize}
+      height={scaledSize}
       viewBox={`0 0 ${scaledSize} ${scaledSize}`}
       fill="none"
       

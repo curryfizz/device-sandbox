@@ -8,7 +8,6 @@ const DeviceList = () => {
   const dispatch = useDispatch();
   const devicesFromStore = useSelector((state) => state.devices.list);
   const devices = devicesFromStore?.length ? devicesFromStore : DEVICES;
-
   useEffect(() => {
     dispatch(fetchDevices());
   }, [dispatch]); // runs only once on mount

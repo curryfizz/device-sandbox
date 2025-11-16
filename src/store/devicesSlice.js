@@ -6,13 +6,12 @@ export const fetchDevices = createAsyncThunk(
   "devices/fetchDevices",
   async () => {
     const response = await deviceAPI.getAllDevices(); // GET /api/devices
-    return response.data;
+    return response.data; // assume an array of devices
   }
 );
 
 const initialState = {
   list: [],          // all devices fetched from DB
-  idMappings: {},    // id -> name mapping
   canvasItem: null,  // currently on-canvas item
   draggedItem: null, // currently dragging item
 };
@@ -47,6 +46,11 @@ const devicesSlice = createSlice({
         };
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchDevices.fulfilled, (state, action) => {
+      state.list = action.payload; // update the device list when fetch succeeds
+    });
   },
 });
 
