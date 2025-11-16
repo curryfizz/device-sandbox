@@ -19,7 +19,7 @@ const FanWithRotation = ({ size = 640, isOn = false, speed = 1 }) => {
 
       const target = isOn ? speed : 0;
       setCurrentSpeed(prev => prev + (target - prev) * 0.01);
-      setAngle(a => a + speedRef.current * 3.6 * dt);
+      setAngle(a => a + speedRef.current * 5 * dt);
 
       frame = requestAnimationFrame(animate);
     };
@@ -86,7 +86,7 @@ const FanWithRotation = ({ size = 640, isOn = false, speed = 1 }) => {
             animationDuration: `${trailDuration}s`,
             animationIterationCount: 'infinite',
             animationTimingFunction: `steps(${trailSteps}, end)`,
-            opacity: `${currentSpeed * 0.0015}`,
+            opacity: `${currentSpeed * 0.006}`,
             pointerEvents: 'none',
           }}
         >
