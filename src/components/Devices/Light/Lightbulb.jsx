@@ -13,6 +13,16 @@ const Lightbulb = ({
   const glowOpacity = 0.3 * brightness / 100;
   const innerGlowOpacity = 0.6 * brightness / 100;
 
+  const hexToRgb = (hex) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16) / 255,
+      g: parseInt(result[2], 16) / 255,
+      b: parseInt(result[3], 16) / 255
+    } : { r: 1, g: 0.9, b: 0.7 }; // fallback warm yellow
+  };
+
+  const rgb = hexToRgb(color);
 
   return (
     <svg
@@ -109,7 +119,7 @@ const Lightbulb = ({
               <feGaussianBlur stdDeviation="30" />
               <feComposite in2="hardAlpha" operator="out" />
               <feColorMatrix type="matrix"
-                values="0 0 0 0 1 0 0 0 0 0.898039 0 0 0 0 0.705882 0 0 0 0.6 0" />
+                values={`0 0 0 0 ${rgb.r} 0 0 0 0 ${rgb.g} 0 0 0 0 ${rgb.b} 0 0 0 0.6 0`} />
               <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1" />
               <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape" />
               <feColorMatrix in="SourceAlpha" type="matrix"
@@ -118,7 +128,7 @@ const Lightbulb = ({
               <feGaussianBlur stdDeviation="10" />
               <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
               <feColorMatrix type="matrix"
-                values="0 0 0 0 1 0 0 0 0 0.898039 0 0 0 0 0.705882 0 0 0 0.4 0" />
+                values={`0 0 0 0 ${rgb.r} 0 0 0 0 ${rgb.g} 0 0 0 0 ${rgb.b} 0 0 0 1 0`} />
               <feBlend mode="normal" in2="shape" result="effect2_innerShadow_0_1" />
             </>)
               :
@@ -149,7 +159,7 @@ const Lightbulb = ({
             <feGaussianBlur stdDeviation="5" />
             <feComposite in2="hardAlpha" operator="out" />
             <feColorMatrix type="matrix"
-              values="0 0 0 0 1 0 0 0 0 0.898039 0 0 0 0 0.705882 0 0 0 1 0" />
+              values={`0 0 0 0 ${rgb.r} 0 0 0 0 ${rgb.g} 0 0 0 0 ${rgb.b} 0 0 0 1 0`} />
             <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1" />
             <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape" />
           </filter>
